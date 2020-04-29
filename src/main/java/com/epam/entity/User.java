@@ -1,10 +1,10 @@
 package com.epam.entity;
 
 public class User extends Entity {
-    String email;
-    String password;
-    String name;
-    String surname;
+    private String email;
+    private String password;
+    private String name;
+    private String surname;
 
     public enum userSqlQuery {
         GET_BY_ID(SqlQuery.GET_BY_ID, "SELECT * FROM users WHERE UserID = ?;"),
