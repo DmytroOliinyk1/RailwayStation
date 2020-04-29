@@ -4,6 +4,7 @@ import com.epam.dao.UserDao;
 import com.epam.dao.builder.UserBuilder;
 import com.epam.dto.UserDto;
 import com.epam.dto.mapper.UserDtoMapper;
+import com.epam.entity.User;
 import com.epam.service.UserService;
 
 import java.util.List;
@@ -31,5 +32,13 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public boolean save(UserDto userDto) {
+        if (userDao.getByFields(new UserBuilder(), userDto.getEmail()).isEmpty()) {
+            User user = new User(userDto.getEmail(), userDto.getPassword(), userDto.getName(), userDto.getSurname());
+            return userDao.insert(user);
+        }
+        return false;
+    }
 
 }
