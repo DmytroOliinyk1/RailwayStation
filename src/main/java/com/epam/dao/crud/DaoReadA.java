@@ -6,6 +6,7 @@ import com.epam.entity.SqlQuery;
 import com.epam.util.CrudUtils;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,20 +21,29 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
 
     @Override
     public TEntity getById(InstanceBuilder<TEntity> builder, Long id) {
-        Connection connection = DBConnection.getConnection();
-        return CrudUtils.getEntity(connection, builder, sqlQueries.get(SqlQuery.GET_BY_ID).toString(), id).get();
+        try(Connection connection = DBConnection.getConnection()){
+            return CrudUtils.getEntity(connection, builder, sqlQueries.get(SqlQuery.GET_BY_ID).toString(), id).get();
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
     }
 
     @Override
     public List<TEntity> getByFields(InstanceBuilder<TEntity> builder, Object... fields) {
-        Connection connection = DBConnection.getConnection();
-        return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_BY_FIELD).toString(), fields);
+        try(Connection connection = DBConnection.getConnection()){
+            return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_BY_FIELD).toString(), fields);
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
     }
 
     @Override
     public List<TEntity> getAll(InstanceBuilder<TEntity> builder, Object... params) {
-        Connection connection = DBConnection.getConnection();
-        return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_ALL).toString(), params);
+        try(Connection connection = DBConnection.getConnection()){
+            return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_ALL).toString(), params);
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
     }
 
     protected abstract void init();
