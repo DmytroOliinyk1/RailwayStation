@@ -10,4 +10,6 @@ public interface BookedPlaceService {
     List<BookedPlaceDto> getDisabledPlaces(BookedPlaceDto bookedPlaceDto);
 
     boolean saveBookedPlace(BookedPlaceDto bookedPlaceDto);
+
+    boolean cancelBook(BookedPlaceDto bookedPlaceDto);
 }

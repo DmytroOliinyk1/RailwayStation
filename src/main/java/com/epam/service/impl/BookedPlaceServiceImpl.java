@@ -36,4 +36,12 @@ public class BookedPlaceServiceImpl implements BookedPlaceService {
                         bookedPlaceDto.getDepartureDate(), bookedPlaceDto.getTrainId())
         );
     }
+
+    @Override
+    public boolean cancelBook(BookedPlaceDto bookedPlaceDto) {
+        return bookedPlaceDao.deleteByFields(
+                bookedPlaceDto.getWagonNumber(), bookedPlaceDto.getPlaceNumber(),
+                bookedPlaceDto.getDepartureDate(), bookedPlaceDto.getTrainId()
+        );
+    }
 }
