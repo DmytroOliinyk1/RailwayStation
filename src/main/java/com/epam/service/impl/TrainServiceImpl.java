@@ -24,4 +24,9 @@ public class TrainServiceImpl implements TrainService {
                 .map(new TrainDtoMapper()::fromDtoToEntity)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public TrainDto getTrain(Long id) {
+        return new TrainDtoMapper().fromDtoToEntity(trainDao.getById(new TrainBuilder(), id));
+    }
 }
