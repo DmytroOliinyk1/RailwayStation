@@ -20,7 +20,11 @@ public class DBConnection {
 
     static {
         try {
-            String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+            String rootPath = Thread.currentThread()
+                    .getContextClassLoader()
+                    .getResource("")
+                    .getPath();
+
             String dbProperties = rootPath + "db.properties";
             properties = new Properties();
             properties.load(new FileInputStream(dbProperties));
