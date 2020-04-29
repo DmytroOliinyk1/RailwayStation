@@ -8,9 +8,11 @@ public class User extends Entity {
 
     public enum userSqlQuery {
         GET_BY_ID(SqlQuery.GET_BY_ID, "SELECT * FROM users WHERE UserID = ?;"),
+        GET_BY_FIELD(SqlQuery.GET_BY_FIELD, "SELECT * FROM users WHERE Email = ?;"),
         GET_ALL(SqlQuery.GET_ALL, "SELECT * FROM users;"),
         INSERT(SqlQuery.INSERT, "INSERT INTO users (Email, Password, Name, Surname) VALUES (?, ?, ?, ?);"),
         UPDATE_BY_ID(SqlQuery.UPDATE_BY_ID, "UPDATE users SET Email = ?, Password = ?, Name = ?, Surname = ? WHERE UserID = ?"),
+        UPDATE_BY_FIELD(SqlQuery.UPDATE_BY_FIELD, "UPDATE users SET Password = ? WHERE Email = ?"),
         DELETE_BY_ID(SqlQuery.DELETE_BY_ID, "DELETE FROM users WHERE UserID = ?;");
 
         private SqlQuery sqlQuery;

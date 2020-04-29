@@ -1,6 +1,6 @@
 package com.epam.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class BookedPlace extends Entity {
 
@@ -11,12 +11,14 @@ public class BookedPlace extends Entity {
 
     public enum bookedPlaceSqlQuery {
         GET_BY_ID(SqlQuery.GET_BY_ID, "SELECT * FROM booked_places WHERE BookedPlaceID = ?;"),
-        GET_BY_FIELD(SqlQuery.GET_BY_FIELD, "SELECT * FROM trains WHERE " +
+        GET_BY_FIELD(SqlQuery.GET_BY_FIELD, "SELECT * FROM booked_places WHERE " +
                 "TrainID = ? AND DepartureDate = ? AND WagonNumber = ? AND PlaceNumber = ?;"),
         GET_ALL(SqlQuery.GET_ALL, "SELECT * FROM booked_places;"),
         INSERT(SqlQuery.INSERT, "INSERT INTO booked_places " +
                 "(WagonNumber, PlaceNumber, DepartureDate, TrainID) VALUES (?, ?, ?, ?);"),
-        DELETE_BY_ID(SqlQuery.DELETE_BY_ID, "DELETE FROM booked_places WHERE BookedPlaceID = ?;");
+        DELETE_BY_ID(SqlQuery.DELETE_BY_ID, "DELETE FROM booked_places WHERE BookedPlaceID = ?;"),
+        DELETE_BY_FIELD(SqlQuery.DELETE_BY_FIELD, "DELETE FROM booked_places WHERE " +
+                "WagonNumber = ? AND PlaceNumber = ? AND DepartureDate = ? AND TrainID = ?;");
 
 
 
