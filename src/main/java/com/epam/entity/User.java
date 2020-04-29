@@ -10,7 +10,8 @@ public class User extends Entity {
         GET_BY_ID(SqlQuery.GET_BY_ID, "SELECT * FROM users WHERE UserID = ?;"),
         GET_ALL(SqlQuery.GET_ALL, "SELECT * FROM users;"),
         INSERT(SqlQuery.INSERT, "INSERT INTO users (Email, Password, Name, Surname) VALUES (?, ?, ?, ?);"),
-        UPDATE_BY_ID(SqlQuery.UPDATE_BY_ID, "UPDATE users SET password = '?' WHERE UserID = ?");
+        UPDATE_BY_ID(SqlQuery.UPDATE_BY_ID, "UPDATE users SET Email = ?, Password = ?, Name = ?, Surname = ? WHERE UserID = ?"),
+        DELETE_BY_ID(SqlQuery.DELETE_BY_ID, "DELETE FROM users WHERE UserID = ?;");
 
         private SqlQuery sqlQuery;
         private String query;
