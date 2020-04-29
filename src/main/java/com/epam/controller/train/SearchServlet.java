@@ -3,6 +3,7 @@ package com.epam.controller.train;
 import com.epam.dto.TrainDto;
 import com.epam.service.TrainService;
 import com.epam.service.impl.TrainServiceImpl;
+import com.epam.util.TrainSearchUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,16 +24,22 @@ public class SearchServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            List<TrainDto> trainDtoList = trainService.getAvailableTrain(
-                    request.getParameter("fromStation"), request.getParameter("toStation")
-            );
-            if(!trainDtoList.isEmpty()){
-                request.setAttribute("trainList", trainDtoList);
-                request.getRequestDispatcher("/view/available-trains.jsp").forward(request, response);
+            if (TrainSearchUtils.checkRoute(
+                    request.getParameter("fromStation"), request.getParameter("toStation"))
+            ) {
+                List<TrainDto> trainDtoList = trainService.getAvailableTrain(
+                        request.getParameter("fromStation"), request.getParameter("toStation")
+                );
+                if(!trainDtoList.isEmpty()){
+                    request.setAttribute("trainList", trainDtoList);
+                    request.getRequestDispatcher("/view/available-trains.jsp").forward(request, response);
+                } else {
+                    throw new RuntimeException();
+                }
             } else {
-                throw new RuntimeException();
+                request.setAttribute("message", "Empty field");
+                request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
             }
-
         } catch (RuntimeException e) {
             request.setAttribute("message", "No available trains");
             request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);

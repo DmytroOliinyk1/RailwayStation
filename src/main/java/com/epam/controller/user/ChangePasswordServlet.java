@@ -27,26 +27,29 @@ public class ChangePasswordServlet extends HttpServlet {
         try {
             Optional<UserDto> currentUser = Optional.ofNullable(
                     (UserDto) request.getSession().getAttribute("currentUser"));
-            if(!currentUser.isPresent()){
-                if(userService.changePassword(request.getParameter("newPassword"), request.getParameter("email"))){
-                    request.setAttribute("successMessage", "Successful: password changed");
-                } else {
-                    request.setAttribute("failedMessage", "Failed: couldn't change password ");
-                }
-
-            } else {
-                if(currentUser.get().getEmail().equals(request.getParameter("email")) &&
-                        LoginUtils.checkPassword(request.getParameter("newPassword"))){
-                    if(userService.changePassword(request.getParameter("newPassword"), request.getParameter("email"))){
+            if (LoginUtils.checkPassword(request.getParameter("newPassword"))) {
+                if (!currentUser.isPresent()) {
+                    if (userService.changePassword(request.getParameter("newPassword"), request.getParameter("email"))) {
                         request.setAttribute("successMessage", "Successful: password changed");
                     } else {
                         request.setAttribute("failedMessage", "Failed: couldn't change password ");
                     }
+
                 } else {
-                    request.setAttribute("failedMessage", "Failed: bad credentials");
+                    if (currentUser.get().getEmail().equals(request.getParameter("email"))) {
+                        if (userService.changePassword(request.getParameter("newPassword"), request.getParameter("email"))) {
+                            request.setAttribute("successMessage", "Successful: password changed");
+                        } else {
+                            request.setAttribute("failedMessage", "Failed: couldn't change password ");
+                        }
+                    } else {
+                        request.setAttribute("failedMessage", "Failed: bad credentials");
+                    }
                 }
+            } else {
+                throw new RuntimeException();
             }
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             request.setAttribute("failedMessage", "Failed: couldn't change password ");
         } finally {
             request.getSession().invalidate();
