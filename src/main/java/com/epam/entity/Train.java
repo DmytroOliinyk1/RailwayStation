@@ -15,7 +15,12 @@ public class Train extends Entity {
     private BigDecimal price;
 
     public enum trainSqlQuery {
-        ;
+        GET_BY_ID(SqlQuery.GET_BY_ID, "SELECT * FROM trains WHERE TrainID = ?;"),
+        GET_BY_FIELD(SqlQuery.GET_BY_FIELD, "SELECT * FROM trains WHERE FromStation = '?' AND ToStation = '?';"),
+        GET_ALL(SqlQuery.GET_ALL, "SELECT * FROM trains"),
+        INSERT(SqlQuery.INSERT, "INSERT INTO trains (TrainNumber, FromStation, ToStation, " +
+                "DepartureTime, ArrivalTime, WagonsQuantity, PlacesQuantity, Price) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 
         private SqlQuery sqlQuery;
         private String query;
@@ -33,6 +38,9 @@ public class Train extends Entity {
         public String toString() {
             return query;
         }
+    }
+
+    public Train() {
     }
 
     public Train(String trainNumber, String fromStation, String toStation, Time departureTime,

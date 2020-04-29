@@ -18,7 +18,12 @@ public class History extends Entity {
     private Long userId;
 
     public enum historySqlQuery {
-        ;
+        GET_BY_ID(SqlQuery.GET_BY_ID, "SELECT * FROM history WHERE HistoryID = ?;"),
+        GET_BY_FIELD(SqlQuery.GET_BY_FIELD, "SELECT * FROM history WHERE DepartureDate >= CURRENT_DATE;"),
+        GET_ALL(SqlQuery.GET_ALL, "SELECT * FROM history"),
+        INSERT(SqlQuery.INSERT, "INSERT INTO history (TrainNumber, FromStation, ToStation, " +
+                "DepartureTime, ArrivalTime, DepartureDate, WagonNumber, PlaceNumber, Price, UserID) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
         private SqlQuery sqlQuery;
         private String query;
@@ -36,6 +41,9 @@ public class History extends Entity {
         public String toString() {
             return query;
         }
+    }
+
+    public History() {
     }
 
     public History(String trainNumber, String fromStation, String toStation, Time departureTime,

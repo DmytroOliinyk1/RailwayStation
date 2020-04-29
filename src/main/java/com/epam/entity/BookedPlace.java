@@ -10,7 +10,15 @@ public class BookedPlace extends Entity {
     private Long trainId;
 
     public enum bookedPlaceSqlQuery {
-        ;
+        GET_BY_ID(SqlQuery.GET_BY_ID, "SELECT * FROM booked_places WHERE BookedPlaceID = ?;"),
+        GET_BY_FIELD(SqlQuery.GET_BY_FIELD, "SELECT * FROM trains WHERE " +
+                "TrainID = ? AND DepartureDate = '?' AND WagonNumber = ? AND PlaceNumber = ?;"),
+        GET_ALL(SqlQuery.GET_ALL, "SELECT * FROM booked_places;"),
+        INSERT(SqlQuery.INSERT, "INSERT INTO booked_places " +
+                "(WagonNumber, PlaceNumber, DepartureDate, TrainID) VALUES (?, ?, ?, ?);"),
+        DELETE_BY_ID(SqlQuery.DELETE_BY_ID, "DELETE FROM booked_places WHERE BookedPlaceID = ?;");
+
+
 
         private SqlQuery sqlQuery;
         private String query;
@@ -28,6 +36,9 @@ public class BookedPlace extends Entity {
         public String toString() {
             return query;
         }
+    }
+
+    public BookedPlace() {
     }
 
     public BookedPlace(Long wagonNumber, Long placeNumber, Date departureDate, Long trainId) {

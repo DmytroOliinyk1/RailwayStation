@@ -7,7 +7,10 @@ public class User extends Entity {
     String surname;
 
     public enum userSqlQuery {
-        ;
+        GET_BY_ID(SqlQuery.GET_BY_ID, "SELECT * FROM users WHERE UserID = ?;"),
+        GET_ALL(SqlQuery.GET_ALL, "SELECT * FROM users;"),
+        INSERT(SqlQuery.INSERT, "INSERT INTO users (Email, Password, Name, Surname) VALUES (?, ?, ?, ?);"),
+        UPDATE_BY_ID(SqlQuery.UPDATE_BY_ID, "UPDATE users SET password = '?' WHERE UserID = ?");
 
         private SqlQuery sqlQuery;
         private String query;
@@ -25,6 +28,9 @@ public class User extends Entity {
         public String toString() {
             return query;
         }
+    }
+
+    public User() {
     }
 
     public User(String email, String password, String name, String surname) {
