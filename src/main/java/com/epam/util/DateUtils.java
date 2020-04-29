@@ -8,6 +8,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtils {
+    /**
+     * Method adds one month to current date
+     *
+     * @return object of type Date
+     */
     public static Date currentDatePlusMonth() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -17,6 +22,11 @@ public class DateUtils {
         return date;
     }
 
+    /**
+     * Method subtracts one day from current date
+     *
+     * @return object of type Date
+     */
     public static Date currentDateMinusDay() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -26,11 +36,18 @@ public class DateUtils {
         return date;
     }
 
-    public static boolean compareDateAndTime(java.sql.Date comparingDate, Time time){
+    /**
+     * Method compares input date and time to current date and time
+     *
+     * @param comparingDate
+     * @param time
+     * @return boolean result of comparing
+     */
+    public static boolean compareDateAndTime(java.sql.Date comparingDate, Time time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String currentTime = sdf.format(new Date());
         try {
-            return LocalTime.now().isAfter(LocalTime.parse( String.valueOf(time) )) &&
+            return LocalTime.now().isAfter(LocalTime.parse(String.valueOf(time))) &&
                     comparingDate.compareTo(sdf.parse(currentTime)) == 0;
         } catch (ParseException e) {
             e.printStackTrace();

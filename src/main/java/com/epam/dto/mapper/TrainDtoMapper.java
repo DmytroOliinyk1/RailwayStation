@@ -4,7 +4,13 @@ import com.epam.dto.TrainDto;
 import com.epam.entity.Entity;
 import com.epam.entity.Train;
 
-public class TrainDtoMapper implements DtoMapper<TrainDto>{
+public class TrainDtoMapper implements DtoMapper<TrainDto> {
+    /**
+     * Method converts Entity to TrainDto
+     *
+     * @param entity
+     * @return object type of TrainDto
+     */
     @Override
     public TrainDto fromDtoToEntity(Entity entity) {
         TrainDto trainDto = new TrainDto();

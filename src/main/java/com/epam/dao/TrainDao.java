@@ -4,6 +4,13 @@ import com.epam.dao.crud.DaoCrudA;
 import com.epam.entity.Train;
 
 public class TrainDao extends DaoCrudA<Train> {
+    /**
+     * Method gets fields of Train and
+     * put them in array
+     *
+     * @param entity
+     * @return array of fields
+     */
     @Override
     protected Object[] getFields(Train entity) {
         Object[] fields = new Object[9];
@@ -19,9 +26,12 @@ public class TrainDao extends DaoCrudA<Train> {
         return fields;
     }
 
+    /**
+     * Method puts sql queries in map
+     */
     @Override
     protected void init() {
-        for(Train.trainSqlQuery trainSqlQuery : Train.trainSqlQuery.values()){
+        for (Train.trainSqlQuery trainSqlQuery : Train.trainSqlQuery.values()) {
             sqlQueries.put(trainSqlQuery.getSqlQuery(), trainSqlQuery);
         }
     }

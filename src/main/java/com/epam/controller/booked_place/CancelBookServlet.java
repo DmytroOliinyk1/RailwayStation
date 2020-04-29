@@ -18,24 +18,47 @@ import java.util.Optional;
 public class CancelBookServlet extends HttpServlet {
     BookedPlaceService bookedPlaceService;
 
+    /**
+     * Method initializes resources
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         bookedPlaceService = new BookedPlaceServiceImpl();
     }
 
+    /**
+     * Method processes POST request for /cancel-book url and
+     * deletes booked place
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try{
+        try {
             Optional<BookedPlaceDto> currentBookedPlace = Optional.of(
                     (BookedPlaceDto) request.getAttribute("currentBookedPlace"));
             bookedPlaceService.cancelBook(currentBookedPlace.get());
             request.setAttribute("message", "Failed: something was wrong");
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
 
         } finally {
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }
     }
 
+    /**
+     * Method processes GET request for /cancel-book url and
+     * forwards to /view/search-trains
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }

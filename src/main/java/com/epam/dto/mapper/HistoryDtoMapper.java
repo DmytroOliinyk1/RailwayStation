@@ -6,6 +6,12 @@ import com.epam.entity.Entity;
 import com.epam.entity.History;
 
 public class HistoryDtoMapper implements DtoMapper<HistoryDto> {
+    /**
+     * Method converts Entity to HistoryDto
+     *
+     * @param entity
+     * @return object type of HistoryDto
+     */
     @Override
     public HistoryDto fromDtoToEntity(Entity entity) {
         HistoryDto historyDto = new HistoryDto();

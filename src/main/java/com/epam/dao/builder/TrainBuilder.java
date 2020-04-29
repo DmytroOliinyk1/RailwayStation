@@ -7,6 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TrainBuilder implements InstanceBuilder<Train> {
+    /**
+     * Method creates object type of Train from ResultSet
+     *
+     * @param resultSet
+     * @return object type of Train
+     */
     @Override
     public Train createInstance(ResultSet resultSet) {
         Train train = new Train();

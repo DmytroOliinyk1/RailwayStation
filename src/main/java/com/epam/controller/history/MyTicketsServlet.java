@@ -22,19 +22,41 @@ import java.util.stream.Collectors;
 public class MyTicketsServlet extends HttpServlet {
     private HistoryService historyService;
 
+    /**
+     * Method initializes resources
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         historyService = new HistoryServiceImpl();
     }
 
+    /**
+     * Method processes POST request for /my-tickets url
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
+    /**
+     * Method processes GET request for /my-tickets url and
+     * gets user's tickets
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try{
+        try {
             Optional<UserDto> currentUser = Optional.of(
-                    (UserDto)request.getSession().getAttribute("currentUser")
+                    (UserDto) request.getSession().getAttribute("currentUser")
             );
 
             List<HistoryDto> myTicketsList = historyService
@@ -46,7 +68,7 @@ public class MyTicketsServlet extends HttpServlet {
 
             request.setAttribute("myTicketsList", myTicketsList);
             request.getRequestDispatcher(JspUrl.MY_TICKETS).forward(request, response);
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             request.setAttribute("message", "Some trouble");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }

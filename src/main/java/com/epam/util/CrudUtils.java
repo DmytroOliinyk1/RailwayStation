@@ -15,7 +15,17 @@ import java.util.List;
 import java.util.Optional;
 
 public class CrudUtils {
-
+    /**
+     * Method gets object of type TEntity
+     * from database
+     *
+     * @param connection
+     * @param builder
+     * @param sqlQuery
+     * @param args
+     * @param <TEntity>
+     * @return optional object
+     */
     public static <TEntity> Optional<TEntity> getEntity(
             Connection connection, InstanceBuilder<TEntity> builder, String sqlQuery, Object... args) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
@@ -32,6 +42,17 @@ public class CrudUtils {
         }
     }
 
+    /**
+     * Method gets list objects of type TEntity
+     * from database
+     *
+     * @param connection
+     * @param builder
+     * @param sqlQuery
+     * @param args
+     * @param <TEntity>
+     * @return list of TEntity object
+     */
     public static <TEntity> List<TEntity> getEntityList(
             Connection connection, InstanceBuilder<TEntity> builder, String sqlQuery, Object... args) {
         List<TEntity> entityList = new ArrayList<>();
@@ -49,6 +70,15 @@ public class CrudUtils {
         }
     }
 
+    /**
+     * Method inserts/updates/deletes objects
+     * in database
+     *
+     * @param connection
+     * @param sqlQuery
+     * @param args
+     * @return number of changed objects in database
+     */
     public static int update(Connection connection, String sqlQuery, Object... args) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             setArgsToStatement(preparedStatement, args);
@@ -59,6 +89,12 @@ public class CrudUtils {
         }
     }
 
+    /**
+     * Method sets arguments in prepared statement
+     *
+     * @param preparedStatement
+     * @param args
+     */
     private static void setArgsToStatement(PreparedStatement preparedStatement, Object... args) {
         try {
             for (int i = 0; i < args.length; i++) {

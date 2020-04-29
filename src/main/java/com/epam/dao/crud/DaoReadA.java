@@ -14,37 +14,67 @@ import java.util.Map;
 public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
     protected final Map<Enum<?>, Enum<?>> sqlQueries;
 
+    /**
+     * Default constructor
+     */
     protected DaoReadA() {
         sqlQueries = new HashMap<>();
         init();
     }
 
+    /**
+     * Method gets object type of TEntity from database
+     * by id
+     *
+     * @param builder
+     * @param id
+     * @return object type of TEntity
+     */
     @Override
     public TEntity getById(InstanceBuilder<TEntity> builder, Long id) {
-        try(Connection connection = DBConnection.getConnection()){
+        try (Connection connection = DBConnection.getConnection()) {
             return CrudUtils.getEntity(connection, builder, sqlQueries.get(SqlQuery.GET_BY_ID).toString(), id).get();
         } catch (SQLException e) {
             throw new RuntimeException();
         }
     }
 
+    /**
+     * Method gets object type of TEntity from database
+     * by fields
+     *
+     * @param builder
+     * @param fields
+     * @return
+     */
     @Override
     public List<TEntity> getByFields(InstanceBuilder<TEntity> builder, Object... fields) {
-        try(Connection connection = DBConnection.getConnection()){
+        try (Connection connection = DBConnection.getConnection()) {
             return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_BY_FIELD).toString(), fields);
         } catch (SQLException e) {
             throw new RuntimeException();
         }
     }
 
+    /**
+     * Method gets list objects type of TEntity from database
+     * by parameters
+     *
+     * @param builder
+     * @param params
+     * @return list objects type of TEntity
+     */
     @Override
     public List<TEntity> getAll(InstanceBuilder<TEntity> builder, Object... params) {
-        try(Connection connection = DBConnection.getConnection()){
+        try (Connection connection = DBConnection.getConnection()) {
             return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_ALL).toString(), params);
         } catch (SQLException e) {
             throw new RuntimeException();
         }
     }
 
+    /**
+     * Initialize query resources
+     */
     protected abstract void init();
 }

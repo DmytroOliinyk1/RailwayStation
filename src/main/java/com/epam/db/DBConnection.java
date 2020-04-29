@@ -46,7 +46,11 @@ public class DBConnection {
         }
     }
 
-
+    /**
+     * Method gets connection to database
+     *
+     * @return object type of Connection
+     */
     public static Connection getConnection() {
         try {
             return dataSource.getConnection();

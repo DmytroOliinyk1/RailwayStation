@@ -7,6 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class HistoryBuilder implements InstanceBuilder<History> {
+    /**
+     * Method creates object type of History from ResultSet
+     *
+     * @param resultSet
+     * @return object type of History
+     */
     @Override
     public History createInstance(ResultSet resultSet) {
         History history = new History();

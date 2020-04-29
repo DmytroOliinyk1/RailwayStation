@@ -19,11 +19,25 @@ import java.util.List;
 public class SearchServlet extends HttpServlet {
     TrainService trainService;
 
+    /**
+     * Method initializes resources
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         trainService = new TrainServiceImpl();
     }
 
+    /**
+     * Method processes POST request for /search-trains url and
+     * searches trains with input route
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             if (TrainSearchUtils.checkRoute(
@@ -32,7 +46,7 @@ public class SearchServlet extends HttpServlet {
                 List<TrainDto> trainDtoList = trainService.getAvailableTrain(
                         request.getParameter("fromStation"), request.getParameter("toStation")
                 );
-                if(!trainDtoList.isEmpty()){
+                if (!trainDtoList.isEmpty()) {
                     request.setAttribute("trainList", trainDtoList);
                     request.getRequestDispatcher(JspUrl.AVAILABLE_TRAINS).forward(request, response);
                 } else {
@@ -48,6 +62,15 @@ public class SearchServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Method processes GET request for /search-trains url and
+     * forwards to /view/search-trains.jsp
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }

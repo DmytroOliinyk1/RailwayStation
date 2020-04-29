@@ -1,5 +1,6 @@
 package com.epam.controller.booked_place;
 
+import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.BookedPlaceDto;
 import com.epam.dto.TrainDto;
@@ -22,14 +23,28 @@ import java.util.Optional;
 public class BuyTicketServlet extends HttpServlet {
     private BookedPlaceService bookedPlaceService;
 
+    /**
+     * Method initializes resources
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         bookedPlaceService = new BookedPlaceServiceImpl();
     }
 
+    /**
+     * Method processes POST request for /buy-ticket url and
+     * saves booked place
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if(request.getSession().getAttribute("currentUser") != null){
+        if (request.getSession().getAttribute("currentUser") != null) {
 
             try {
 
@@ -44,7 +59,7 @@ public class BuyTicketServlet extends HttpServlet {
 
                 Date departureDate = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
 
-                if(DateUtils.compareDateAndTime(departureDate, trainDto.get().getDepartureTime())){
+                if (DateUtils.compareDateAndTime(departureDate, trainDto.get().getDepartureTime())) {
                     throw new RuntimeException();
                 }
 
@@ -75,7 +90,16 @@ public class BuyTicketServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Method processes GET request for /buy-ticket url and
+     * forwards to /view/search-trains.jsp
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
+        request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }
 }

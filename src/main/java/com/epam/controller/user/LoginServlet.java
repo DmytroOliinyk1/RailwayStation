@@ -20,15 +20,28 @@ import java.util.Optional;
 public class LoginServlet extends HttpServlet {
     private UserService userService;
 
+    /**
+     * Method initializes resources
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         userService = new UserServiceImpl();
     }
 
+    /**
+     * Method processes POST request for /login url and
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            if(LoginUtils.checkEmail(request.getParameter("email")) &&
-                    LoginUtils.checkPassword(request.getParameter("password"))){
+            if (LoginUtils.checkEmail(request.getParameter("email")) &&
+                    LoginUtils.checkPassword(request.getParameter("password"))) {
                 Optional<UserDto> currentUser = Optional.of(
                         userService.login(request.getParameter("email"), request.getParameter("password")));
                 HttpSession session = request.getSession();
@@ -43,6 +56,15 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Method processes GET request for /login url and forward to
+     * forward to /view/login.jsp
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
     }

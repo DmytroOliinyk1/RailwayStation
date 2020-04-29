@@ -19,11 +19,25 @@ import java.util.Optional;
 public class ChangePasswordServlet extends HttpServlet {
     UserService userService;
 
+    /**
+     * Method initializes resources
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         userService = new UserServiceImpl();
     }
 
+    /**
+     * Method processes POST request for /change-password url and
+     * changes account password
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
@@ -60,6 +74,15 @@ public class ChangePasswordServlet extends HttpServlet {
 
     }
 
+    /**
+     * Method processes GET request for /change-password url and
+     * forwards to /view/change-password.jsp
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.CHANGE_PASSWORD).forward(request, response);
     }

@@ -20,11 +20,25 @@ import java.io.IOException;
 public class RegistrationServlet extends HttpServlet {
     UserService userService;
 
+    /**
+     * Method initializes resources
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         userService = new UserServiceImpl();
     }
 
+    /**
+     * Method processes POST request for /registration url and
+     * saves new user
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             if (LoginUtils.checkEmail(request.getParameter("email")) &&
@@ -50,6 +64,15 @@ public class RegistrationServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Method processes GET request for /registration url and
+     * forward /view/login.jsp
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
     }

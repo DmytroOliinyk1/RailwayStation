@@ -22,15 +22,37 @@ import java.util.Optional;
 public class GetTrainServlet extends HttpServlet {
     TrainService trainService;
 
+    /**
+     * Method initializes resources
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         trainService = new TrainServiceImpl();
     }
 
+    /**
+     * Method processes POST request for /get-train url and
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
+    /**
+     * Method processes GET request for /get-train url and
+     * gets train
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             Optional<TrainDto> currentTrain = Optional.of(

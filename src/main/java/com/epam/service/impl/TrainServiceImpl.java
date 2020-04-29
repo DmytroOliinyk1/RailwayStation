@@ -17,6 +17,13 @@ public class TrainServiceImpl implements TrainService {
         trainDao = new TrainDao();
     }
 
+    /**
+     * Method gets list of trains from database
+     *
+     * @param fromStation
+     * @param toStation
+     * @return list objects of type trainDto
+     */
     @Override
     public List<TrainDto> getAvailableTrain(String fromStation, String toStation) {
         return trainDao.getByFields(new TrainBuilder(), fromStation, toStation)
@@ -25,6 +32,12 @@ public class TrainServiceImpl implements TrainService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Method gets train from database
+     *
+     * @param id
+     * @return object of type TrainDto
+     */
     @Override
     public TrainDto getTrain(Long id) {
         return new TrainDtoMapper().fromDtoToEntity(trainDao.getById(new TrainBuilder(), id));

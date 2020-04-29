@@ -6,6 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BookedPlaceBuilder implements InstanceBuilder<BookedPlace> {
+    /**
+     * Method creates object type of BookedPlace from ResultSet
+     *
+     * @param resultSet
+     * @return object type of BookedPlace
+     */
     @Override
     public BookedPlace createInstance(ResultSet resultSet) {
         BookedPlace bookedPlace = new BookedPlace();

@@ -4,6 +4,13 @@ import com.epam.dao.crud.DaoCrudA;
 import com.epam.entity.History;
 
 public class HistoryDao extends DaoCrudA<History> {
+    /**
+     * Method gets fields of History and
+     * put them in array
+     *
+     * @param entity
+     * @return array of fields
+     */
     @Override
     protected Object[] getFields(History entity) {
         Object[] fields = new Object[11];
@@ -21,9 +28,12 @@ public class HistoryDao extends DaoCrudA<History> {
         return fields;
     }
 
+    /**
+     * Method puts sql queries in map
+     */
     @Override
     protected void init() {
-        for(History.historySqlQuery historySqlQuery : History.historySqlQuery.values()){
+        for (History.historySqlQuery historySqlQuery : History.historySqlQuery.values()) {
             sqlQueries.put(historySqlQuery.getSqlQuery(), historySqlQuery);
         }
     }

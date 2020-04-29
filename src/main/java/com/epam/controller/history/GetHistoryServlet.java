@@ -20,11 +20,25 @@ import java.util.Optional;
 public class GetHistoryServlet extends HttpServlet {
     HistoryService historyService;
 
+    /**
+     * Method initializes resources
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         historyService = new HistoryServiceImpl();
     }
 
+    /**
+     * Method processes POST request for /get-history url and
+     * gets user's history
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             Optional<UserDto> currentUser = Optional.of(
@@ -42,6 +56,15 @@ public class GetHistoryServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Method processes GET request for /get-history url and
+     * calls doPost method
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }

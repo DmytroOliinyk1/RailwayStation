@@ -18,6 +18,13 @@ public class UserServiceImpl implements UserService {
         userDao = new UserDao();
     }
 
+    /**
+     * Method checks if user exist
+     *
+     * @param email
+     * @param password
+     * @return object of type UserDto
+     */
     @Override
     public UserDto login(String email, String password) {
         List<UserDto> users = userDao.
@@ -32,11 +39,24 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    /**
+     * Method changes account password
+     *
+     * @param email
+     * @param newPassword
+     * @return boolean result of changing
+     */
     @Override
     public boolean changePassword(String newPassword, String email) {
         return userDao.updateByFields(newPassword, email);
     }
 
+    /**
+     * Method saves new user in database
+     *
+     * @param userDto
+     * @return boolean result of saving
+     */
     @Override
     public boolean save(UserDto userDto) {
         if (userDao.getByFields(new UserBuilder(), userDto.getEmail()).isEmpty()) {
@@ -46,6 +66,12 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    /**
+     * Method deletes user from database
+     *
+     * @param id
+     * @return boolean result of deleting
+     */
     @Override
     public boolean deleteUser(Long id) {
         return userDao.deleteById(id);

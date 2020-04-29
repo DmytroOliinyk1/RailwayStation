@@ -17,6 +17,13 @@ public class BookedPlaceServiceImpl implements BookedPlaceService {
         bookedPlaceDao = new BookedPlaceDao();
     }
 
+    /**
+     * Method gets list objects of type BookedPlaceDto
+     * from database
+     *
+     * @param bookedPlaceDto
+     * @return list objects of type BookedPlaceDto
+     */
     @Override
     public List<BookedPlaceDto> getDisabledPlaces(BookedPlaceDto bookedPlaceDto) {
         return bookedPlaceDao.getByFields(
@@ -28,6 +35,12 @@ public class BookedPlaceServiceImpl implements BookedPlaceService {
                 );
     }
 
+    /**
+     * Method saves booked place in database
+     *
+     * @param bookedPlaceDto
+     * @return boolean result of saving
+     */
     @Override
     public boolean saveBookedPlace(BookedPlaceDto bookedPlaceDto) {
         return bookedPlaceDao.insert(
@@ -37,6 +50,12 @@ public class BookedPlaceServiceImpl implements BookedPlaceService {
         );
     }
 
+    /**
+     * Method deletes booked place from database
+     *
+     * @param bookedPlaceDto
+     * @return boolean result of deleting
+     */
     @Override
     public boolean cancelBook(BookedPlaceDto bookedPlaceDto) {
         return bookedPlaceDao.deleteByFields(

@@ -19,6 +19,14 @@ public class HistoryServiceImpl implements HistoryService {
         historyDao = new HistoryDao();
     }
 
+    /**
+     * Method save booked ticket in database
+     *
+     * @param bookedPlaceDto
+     * @param trainDto
+     * @param userId
+     * @return boolean result of saving
+     */
     @Override
     public boolean saveTicket(BookedPlaceDto bookedPlaceDto, TrainDto trainDto, Long userId) {
         return historyDao.insert(new History(
@@ -31,6 +39,12 @@ public class HistoryServiceImpl implements HistoryService {
         );
     }
 
+    /**
+     * Method gets list objects of type HistoryDto
+     *
+     * @param userId
+     * @return list objects of type HistoryDto
+     */
     @Override
     public List<HistoryDto> getHistory(Long userId) {
         return historyDao.getByFields(new HistoryBuilder(), userId)

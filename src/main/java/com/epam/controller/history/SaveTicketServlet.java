@@ -20,11 +20,25 @@ import java.util.Optional;
 public class SaveTicketServlet extends HttpServlet {
     private HistoryService historyService;
 
+    /**
+     * Method initializes resources
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         historyService = new HistoryServiceImpl();
     }
 
+    /**
+     * Method processes POST request for /save-ticket url and
+     * saves user's ticket
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             Optional<BookedPlaceDto> currentBookedPlace =
@@ -48,6 +62,15 @@ public class SaveTicketServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Method processes GET request for /save-ticket url and
+     * forwards to /view/search-trains.jsp
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }

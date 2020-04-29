@@ -5,6 +5,12 @@ import com.epam.entity.BookedPlace;
 import com.epam.entity.Entity;
 
 public class BookedPlaceDtoMapper implements DtoMapper<BookedPlaceDto> {
+    /**
+     * Method converts Entity to BookedPlaceDto
+     *
+     * @param entity
+     * @return object type of BookedPlaceDto
+     */
     @Override
     public BookedPlaceDto fromDtoToEntity(Entity entity) {
         BookedPlaceDto bookedPlaceDto = new BookedPlaceDto();

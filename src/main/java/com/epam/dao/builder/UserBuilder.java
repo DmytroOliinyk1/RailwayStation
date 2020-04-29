@@ -6,6 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserBuilder implements InstanceBuilder<User> {
+    /**
+     * Method creates object type of User from ResultSet
+     *
+     * @param resultSet
+     * @return object type of User
+     */
     @Override
     public User createInstance(ResultSet resultSet) {
         User user = new User();
