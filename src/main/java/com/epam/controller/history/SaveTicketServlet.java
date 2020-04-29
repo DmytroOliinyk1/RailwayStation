@@ -1,5 +1,7 @@
 package com.epam.controller.history;
 
+import com.epam.constants.jsp_url.JspUrl;
+import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.BookedPlaceDto;
 import com.epam.dto.TrainDto;
 import com.epam.dto.UserDto;
@@ -14,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(name = "SaveTicketServlet", urlPatterns = "/save-ticket")
+@WebServlet(name = "SaveTicketServlet", urlPatterns = ServletUrl.SAVE_TICKETS)
 public class SaveTicketServlet extends HttpServlet {
     private HistoryService historyService;
 
@@ -38,15 +40,15 @@ public class SaveTicketServlet extends HttpServlet {
             historyService.saveTicket(
                     currentBookedPlace.get(), currentTrain.get(), currentUser.get().getUserId()
             );
-            request.getRequestDispatcher("/get-history").forward(request, response);
+            request.getRequestDispatcher(ServletUrl.GET_HISTORY).forward(request, response);
         } catch (RuntimeException e) {
             request.setAttribute(
                     "currentBookedPlace", request.getAttribute("currentBookedPlace"));
-            request.getRequestDispatcher("/cancel-book").forward(request, response);
+            request.getRequestDispatcher(ServletUrl.CANCEL_BOOK).forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
+        request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }
 }

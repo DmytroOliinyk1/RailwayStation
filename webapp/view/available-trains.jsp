@@ -1,4 +1,5 @@
 <%@ page import="com.epam.dto.UserDto" %>
+<%@ page import="com.epam.constants.jsp_url.JspUrl" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -20,7 +21,7 @@
 <%
     UserDto currentUser = (UserDto) session.getAttribute("currentUser");
     if(currentUser == null){
-        response.sendRedirect("/view/login.jsp ");
+        response.sendRedirect(JspUrl.LOGIN);
     }
 %>
 <div class = "container">

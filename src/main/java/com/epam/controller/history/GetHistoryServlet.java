@@ -1,5 +1,7 @@
 package com.epam.controller.history;
 
+import com.epam.constants.jsp_url.JspUrl;
+import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.HistoryDto;
 import com.epam.dto.UserDto;
 import com.epam.service.HistoryService;
@@ -14,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@WebServlet(name = "GetHistoryServlet", urlPatterns = "/get-history")
+@WebServlet(name = "GetHistoryServlet", urlPatterns = ServletUrl.GET_HISTORY)
 public class GetHistoryServlet extends HttpServlet {
     HistoryService historyService;
 
@@ -33,10 +35,10 @@ public class GetHistoryServlet extends HttpServlet {
                     historyService.getHistory(currentUser.get().getUserId()
                     );
             request.setAttribute("historyList", historyList);
-            request.getRequestDispatcher("/view/show-history.jsp").forward(request, response);
+            request.getRequestDispatcher(JspUrl.SHOW_HISTORY).forward(request, response);
         } catch (RuntimeException e) {
             request.setAttribute("message", "Failed: some trouble");
-            request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
+            request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }
     }
 

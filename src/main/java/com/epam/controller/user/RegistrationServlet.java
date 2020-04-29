@@ -1,5 +1,7 @@
 package com.epam.controller.user;
 
+import com.epam.constants.jsp_url.JspUrl;
+import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.UserDto;
 import com.epam.dto.mapper.UserDtoMapper;
 import com.epam.entity.User;
@@ -14,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "RegistrationServlet", urlPatterns = "/registration")
+@WebServlet(name = "RegistrationServlet", urlPatterns = ServletUrl.REGISTRATION)
 public class RegistrationServlet extends HttpServlet {
     UserService userService;
 
@@ -44,11 +46,11 @@ public class RegistrationServlet extends HttpServlet {
             request.setAttribute("failedMessage", "Failed: couldn't create account");
         } finally {
             request.getSession().invalidate();
-            request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+            request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+        request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
     }
 }

@@ -1,4 +1,5 @@
-<%@ page import="com.epam.dto.UserDto" %><%--
+<%@ page import="com.epam.dto.UserDto" %>
+<%@ page import="com.epam.constants.jsp_url.JspUrl" %><%--
   Created by IntelliJ IDEA.
   User: Acer
   Date: 25.04.2020
@@ -15,12 +16,12 @@
 <%
     UserDto currentUser = (UserDto) session.getAttribute("currentUser");
     if(currentUser == null){
-        response.sendRedirect("/view/login.jsp ");
+        response.sendRedirect(JspUrl.LOGIN);
     }
 %>
 <div class="container">
     <p class="text-muted">${message}</p>
-    <form action=${pageContext.request.contextPath}/search method="post">
+    <form action=${pageContext.request.contextPath}/search-trains method="post">
 
         <div class="card">
 

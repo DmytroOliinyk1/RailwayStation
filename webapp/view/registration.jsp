@@ -1,4 +1,5 @@
-<%@ page import="com.epam.dto.UserDto" %><%--
+<%@ page import="com.epam.dto.UserDto" %>
+<%@ page import="com.epam.constants.jsp_url.JspUrl" %><%--
   Created by IntelliJ IDEA.
   User: Acer
   Date: 25.04.2020
@@ -16,7 +17,7 @@
 <%
     UserDto currentUser = (UserDto) session.getAttribute("currentUser");
     if(currentUser != null){
-        response.sendRedirect("/view/search-trains.jsp");
+        response.sendRedirect(JspUrl.SEARCH_TRAINS);
     }
 
 

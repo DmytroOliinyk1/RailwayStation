@@ -1,4 +1,4 @@
-package com.epam.controller.constants.servlet_url;
+package com.epam.constants.servlet_url;
 
 public interface ServletUrl {
     String BUY_TICKETS = "/buy-ticket";

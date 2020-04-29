@@ -1,5 +1,7 @@
 package com.epam.controller.train;
 
+import com.epam.constants.jsp_url.JspUrl;
+import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.TrainDto;
 import com.epam.dto.UserDto;
 import com.epam.service.TrainService;
@@ -13,11 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
-@WebServlet(name = "GetTrainServlet", urlPatterns = "/get-train")
+@WebServlet(name = "GetTrainServlet", urlPatterns = ServletUrl.GET_TRAIN)
 public class GetTrainServlet extends HttpServlet {
     TrainService trainService;
 
@@ -45,11 +46,11 @@ public class GetTrainServlet extends HttpServlet {
             request.setAttribute("currentDatePlusMonth",
                     new SimpleDateFormat("yyyy-MM-dd").format(DateUtils.currentDatePlusMonth()));
 
-            request.getRequestDispatcher("/view/buy-ticket.jsp").forward(request, response);
+            request.getRequestDispatcher(JspUrl.BUY_TICKETS).forward(request, response);
 
         } catch (RuntimeException e) {
             request.setAttribute("message", "Train not found");
-            request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
+            request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.epam.controller.user;
 
+import com.epam.constants.jsp_url.JspUrl;
+import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.UserDto;
 import com.epam.service.UserService;
 import com.epam.service.impl.UserServiceImpl;
@@ -13,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(name = "ChangePasswordServlet", urlPatterns = "/change-password")
+@WebServlet(name = "ChangePasswordServlet", urlPatterns = ServletUrl.CHANGE_PASSWORD)
 public class ChangePasswordServlet extends HttpServlet {
     UserService userService;
 
@@ -53,12 +55,12 @@ public class ChangePasswordServlet extends HttpServlet {
             request.setAttribute("failedMessage", "Failed: couldn't change password ");
         } finally {
             request.getSession().invalidate();
-            request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+            request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
         }
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/change-password").forward(request, response);
+        request.getRequestDispatcher(JspUrl.CHANGE_PASSWORD).forward(request, response);
     }
 }

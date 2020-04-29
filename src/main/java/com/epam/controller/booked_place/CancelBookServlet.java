@@ -1,5 +1,7 @@
 package com.epam.controller.booked_place;
 
+import com.epam.constants.jsp_url.JspUrl;
+import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.BookedPlaceDto;
 import com.epam.service.BookedPlaceService;
 import com.epam.service.impl.BookedPlaceServiceImpl;
@@ -12,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(name = "CancelBookServlet", urlPatterns = "/cancel-book")
+@WebServlet(name = "CancelBookServlet", urlPatterns = ServletUrl.CANCEL_BOOK)
 public class CancelBookServlet extends HttpServlet {
     BookedPlaceService bookedPlaceService;
 
@@ -28,14 +30,13 @@ public class CancelBookServlet extends HttpServlet {
             bookedPlaceService.cancelBook(currentBookedPlace.get());
             request.setAttribute("message", "Failed: something was wrong");
         } catch (RuntimeException e){
-            request.setAttribute("message", "Failed: ticket is not purchased");
-            request.getRequestDispatcher("/search-trains").forward(request, response);
+
         } finally {
-            request.getRequestDispatcher("/search").forward(request, response);
+            request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
+        request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }
 }

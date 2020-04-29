@@ -1,5 +1,7 @@
 package com.epam.controller.history;
 
+import com.epam.constants.jsp_url.JspUrl;
+import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.HistoryDto;
 import com.epam.dto.UserDto;
 import com.epam.service.HistoryService;
@@ -12,12 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "MyTicketsServlet", urlPatterns = "/my-tickets")
+@WebServlet(name = "MyTicketsServlet", urlPatterns = ServletUrl.MY_TICKETS)
 public class MyTicketsServlet extends HttpServlet {
     private HistoryService historyService;
 
@@ -44,10 +45,10 @@ public class MyTicketsServlet extends HttpServlet {
                     .collect(Collectors.toList());
 
             request.setAttribute("myTicketsList", myTicketsList);
-            request.getRequestDispatcher("/view/my-tickets.jsp").forward(request, response);
+            request.getRequestDispatcher(JspUrl.MY_TICKETS).forward(request, response);
         } catch (RuntimeException e){
             request.setAttribute("message", "Some trouble");
-            request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
+            request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }
     }
 }

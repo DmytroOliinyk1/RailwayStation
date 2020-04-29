@@ -1,5 +1,6 @@
 <%@ page import="com.epam.entity.User" %>
 <%@ page import="com.epam.dto.UserDto" %>
+<%@ page import="com.epam.constants.jsp_url.JspUrl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,7 +12,7 @@
 <%
     UserDto currentUser = (UserDto) session.getAttribute("currentUser");
     if(currentUser != null){
-        response.sendRedirect("/view/search-trains.jsp");
+        response.sendRedirect(JspUrl.SEARCH_TRAINS);
     }
 
 

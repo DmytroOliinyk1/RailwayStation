@@ -1,4 +1,4 @@
-<%
+<%@ page import="com.epam.constants.jsp_url.JspUrl" %><%
     session.invalidate();
-    response.sendRedirect("/view/login.jsp");
+    response.sendRedirect(JspUrl.LOGIN);
 %>

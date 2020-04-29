@@ -1,5 +1,7 @@
 package com.epam.controller.user;
 
+import com.epam.constants.jsp_url.JspUrl;
+import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.UserDto;
 import com.epam.service.UserService;
 import com.epam.service.impl.UserServiceImpl;
@@ -14,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(name = "LoginServlet", urlPatterns = "/login")
+@WebServlet(name = "LoginServlet", urlPatterns = ServletUrl.LOGIN)
 public class LoginServlet extends HttpServlet {
     private UserService userService;
 
@@ -31,17 +33,17 @@ public class LoginServlet extends HttpServlet {
                         userService.login(request.getParameter("email"), request.getParameter("password")));
                 HttpSession session = request.getSession();
                 session.setAttribute("currentUser", currentUser.get());
-                request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
+                request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
             } else {
                 throw new RuntimeException();
             }
         } catch (RuntimeException e) {
             request.setAttribute("failedMessage", "Bad credentials");
-            request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+            request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+        request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
     }
 }

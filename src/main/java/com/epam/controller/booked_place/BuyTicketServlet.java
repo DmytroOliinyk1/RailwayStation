@@ -1,5 +1,6 @@
 package com.epam.controller.booked_place;
 
+import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.BookedPlaceDto;
 import com.epam.dto.TrainDto;
 import com.epam.service.BookedPlaceService;
@@ -13,14 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Optional;
 
-@WebServlet(name = "BuyTicketServlet", urlPatterns = "/buy-ticket")
+@WebServlet(name = "BuyTicketServlet", urlPatterns = ServletUrl.BUY_TICKETS)
 public class BuyTicketServlet extends HttpServlet {
     private BookedPlaceService bookedPlaceService;
 

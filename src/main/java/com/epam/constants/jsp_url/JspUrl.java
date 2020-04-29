@@ -1,8 +1,8 @@
-package com.epam.controller.constants.jsp_url;
+package com.epam.constants.jsp_url;
 
 public interface JspUrl {
     String AVAILABLE_TRAINS = "/view/available-trains.jsp";
-    String BUY_TICKETS = "/view/buy-tickets.jsp";
+    String BUY_TICKETS = "/view/buy-ticket.jsp";
     String CHANGE_PASSWORD = "/view/change-password.jsp";
     String LOGIN = "/view/login.jsp";
     String LOGOUT = "/view/logout.jsp";

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.epam.dto.UserDto" %><%--
+<%@ page import="com.epam.dto.UserDto" %>
+<%@ page import="com.epam.constants.jsp_url.JspUrl" %><%--
   Created by IntelliJ IDEA.
   User: Acer
   Date: 28.04.2020
@@ -19,7 +20,7 @@
 <%
     UserDto currentUser = (UserDto) session.getAttribute("currentUser");
     if(currentUser == null){
-        response.sendRedirect("/view/login.jsp ");
+        response.sendRedirect(JspUrl.LOGIN);
     }
 %>
 <div class = "container">

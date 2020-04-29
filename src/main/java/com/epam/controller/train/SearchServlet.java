@@ -1,5 +1,7 @@
 package com.epam.controller.train;
 
+import com.epam.constants.jsp_url.JspUrl;
+import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.TrainDto;
 import com.epam.service.TrainService;
 import com.epam.service.impl.TrainServiceImpl;
@@ -13,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "SearchServlet", urlPatterns = "/search")
+@WebServlet(name = "SearchServlet", urlPatterns = ServletUrl.SEARCH_TRAINS)
 public class SearchServlet extends HttpServlet {
     TrainService trainService;
 
@@ -32,21 +34,21 @@ public class SearchServlet extends HttpServlet {
                 );
                 if(!trainDtoList.isEmpty()){
                     request.setAttribute("trainList", trainDtoList);
-                    request.getRequestDispatcher("/view/available-trains.jsp").forward(request, response);
+                    request.getRequestDispatcher(JspUrl.AVAILABLE_TRAINS).forward(request, response);
                 } else {
                     throw new RuntimeException();
                 }
             } else {
                 request.setAttribute("message", "Empty field");
-                request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
+                request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
             }
         } catch (RuntimeException e) {
             request.setAttribute("message", "No available trains");
-            request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
+            request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
+        request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }
 }
