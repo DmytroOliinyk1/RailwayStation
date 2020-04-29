@@ -33,6 +33,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean changePassword(String newPassword, String email) {
+        if (userDao.updateByFields(newPassword, email)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean save(UserDto userDto) {
         if (userDao.getByFields(new UserBuilder(), userDto.getEmail()).isEmpty()) {
             User user = new User(userDto.getEmail(), userDto.getPassword(), userDto.getName(), userDto.getSurname());
