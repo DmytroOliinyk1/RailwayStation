@@ -34,10 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean changePassword(String newPassword, String email) {
-        if (userDao.updateByFields(newPassword, email)) {
-            return true;
-        }
-        return false;
+        return userDao.updateByFields(newPassword, email);
     }
 
     @Override
@@ -47,6 +44,11 @@ public class UserServiceImpl implements UserService {
             return userDao.insert(user);
         }
         return false;
+    }
+
+    @Override
+    public boolean deleteUser(Long id) {
+        return userDao.deleteById(id);
     }
 
 }

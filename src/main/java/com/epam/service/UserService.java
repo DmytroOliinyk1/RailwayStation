@@ -9,5 +9,7 @@ public interface UserService {
 
     boolean changePassword(String email, String newPassword);
 
-    public boolean save(UserDto userDto);
+    boolean save(UserDto userDto);
+
+    boolean deleteUser(Long id);
 }
