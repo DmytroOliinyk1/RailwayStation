@@ -47,6 +47,6 @@ public class SaveTicketServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/search").forward(request, response);
+        request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
     }
 }

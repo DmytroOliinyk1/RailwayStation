@@ -47,6 +47,7 @@ public class MyTicketsServlet extends HttpServlet {
             request.getRequestDispatcher("/view/my-tickets.jsp").forward(request, response);
         } catch (RuntimeException e){
             request.setAttribute("message", "Some trouble");
+            request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
         }
     }
 }

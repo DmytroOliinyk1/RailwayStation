@@ -36,7 +36,7 @@ public class GetHistoryServlet extends HttpServlet {
             request.getRequestDispatcher("/view/show-history.jsp").forward(request, response);
         } catch (RuntimeException e) {
             request.setAttribute("message", "Failed: some trouble");
-            request.getRequestDispatcher("/search").forward(request, response);
+            request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
         }
     }
 
