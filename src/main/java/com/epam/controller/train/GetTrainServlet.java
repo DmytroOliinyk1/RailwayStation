@@ -4,6 +4,7 @@ import com.epam.dto.TrainDto;
 import com.epam.dto.UserDto;
 import com.epam.service.TrainService;
 import com.epam.service.impl.TrainServiceImpl;
+import com.epam.util.DateUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +43,7 @@ public class GetTrainServlet extends HttpServlet {
             request.getSession().setAttribute("currentTrain", currentTrain.get());
             request.setAttribute("currentDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
             request.setAttribute("currentDatePlusMonth",
-                    new SimpleDateFormat("yyyy-MM-dd").format(currentDatePlusMonth()));
+                    new SimpleDateFormat("yyyy-MM-dd").format(DateUtils.currentDatePlusMonth()));
 
             request.getRequestDispatcher("/view/buy-ticket.jsp").forward(request, response);
 
@@ -50,14 +51,5 @@ public class GetTrainServlet extends HttpServlet {
             request.setAttribute("message", "Train not found");
             request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
         }
-    }
-
-    private Date currentDatePlusMonth() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.MONTH, 1);
-        Date date = new Date();
-        date.setTime(calendar.getTimeInMillis());
-        return date;
     }
 }

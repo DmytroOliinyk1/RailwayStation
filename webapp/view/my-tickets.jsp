@@ -41,26 +41,23 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${historyList}" var="history">
+        <c:forEach items="${myTicketsList}" var="myTickets">
             <tr>
-                <td>${history.trainNumber}</td>
-                <td>${history.fromStation}</td>
-                <td>${history.toStation}</td>
-                <td>${history.departureTime}</td>
-                <td>${history.arrivalTime}</td>
-                <td>${history.departureDate}</td>
-                <td>${history.wagonNumber}</td>
-                <td>${history.placeNumber}</td>
-                <td>${history.price}</td>
+                <td>${myTickets.trainNumber}</td>
+                <td>${myTickets.fromStation}</td>
+                <td>${myTickets.toStation}</td>
+                <td>${myTickets.departureTime}</td>
+                <td>${myTickets.arrivalTime}</td>
+                <td>${myTickets.departureDate}</td>
+                <td>${myTickets.wagonNumber}</td>
+                <td>${myTickets.placeNumber}</td>
+                <td>${myTickets.price}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
     <div class="float-right">
         <a href="${pageContext.request.contextPath}/view/search-trains.jsp">Search train</a>
-    </div>
-    <div class="float-left">
-        <a href="${pageContext.request.contextPath}/my-tickets">My tickets</a>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -74,5 +71,3 @@
 
 </body>
 </html>
-
-

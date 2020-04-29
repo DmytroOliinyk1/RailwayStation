@@ -4,6 +4,7 @@ import com.epam.dto.BookedPlaceDto;
 import com.epam.dto.TrainDto;
 import com.epam.service.BookedPlaceService;
 import com.epam.service.impl.BookedPlaceServiceImpl;
+import com.epam.util.DateUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
 
 @WebServlet(name = "BuyTicketServlet", urlPatterns = "/buy-ticket")
@@ -41,6 +45,10 @@ public class BuyTicketServlet extends HttpServlet {
                 String date = request.getParameter("departureDate");
 
                 Date departureDate = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
+
+                if(DateUtils.compareDateAndTime(departureDate, trainDto.get().getDepartureTime())){
+                    throw new RuntimeException();
+                }
 
                 BookedPlaceDto bookedPlaceDto = new BookedPlaceDto(wagonNumber, placeNumber, departureDate,
                         trainDto.get().getTrainId());
