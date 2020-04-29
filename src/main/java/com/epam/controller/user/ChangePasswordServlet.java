@@ -3,6 +3,7 @@ package com.epam.controller.user;
 import com.epam.dto.UserDto;
 import com.epam.service.UserService;
 import com.epam.service.impl.UserServiceImpl;
+import com.epam.util.LoginUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,14 +35,15 @@ public class ChangePasswordServlet extends HttpServlet {
                 }
 
             } else {
-                if(currentUser.get().getEmail().equals(request.getParameter("email"))){
+                if(currentUser.get().getEmail().equals(request.getParameter("email")) &&
+                        LoginUtils.checkPassword(request.getParameter("newPassword"))){
                     if(userService.changePassword(request.getParameter("newPassword"), request.getParameter("email"))){
                         request.setAttribute("successMessage", "Successful: password changed");
                     } else {
                         request.setAttribute("failedMessage", "Failed: couldn't change password ");
                     }
                 } else {
-                    request.setAttribute("failedMessage", "Failed: not your email ");
+                    request.setAttribute("failedMessage", "Failed: bad credentials");
                 }
             }
         } catch (RuntimeException e){
