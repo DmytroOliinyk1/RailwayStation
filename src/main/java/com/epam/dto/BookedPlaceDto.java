@@ -1,6 +1,6 @@
 package com.epam.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class BookedPlaceDto {
     private Long BookedPlaceId;
