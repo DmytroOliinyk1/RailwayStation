@@ -27,4 +27,13 @@ public class BookedPlaceServiceImpl implements BookedPlaceService {
                 .collect(Collectors.toList()
                 );
     }
+
+    @Override
+    public boolean saveBookedPlace(BookedPlaceDto bookedPlaceDto) {
+        return bookedPlaceDao.insert(
+                new BookedPlace(
+                        bookedPlaceDto.getWagonNumber(), bookedPlaceDto.getPlaceNumber(),
+                        bookedPlaceDto.getDepartureDate(), bookedPlaceDto.getTrainId())
+        );
+    }
 }
