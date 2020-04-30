@@ -30,6 +30,7 @@ public class DeleteAccountServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /delete-account url and
+     * deletes account
      *
      * @param request
      * @param response
@@ -37,12 +38,23 @@ public class DeleteAccountServlet extends HttpServlet {
      * @throws IOException
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            Optional<UserDto> currentUser = Optional.of(
+                    (UserDto) request.getSession().getAttribute("currentUser"));
 
+            userService.deleteUser(currentUser.get().getUserId());
+            request.setAttribute("successMessage", "Successful: account is deleted");
+        } catch (RuntimeException e) {
+            request.setAttribute("failedMessage", "Failed: couldn't delete account");
+        } finally {
+            request.getSession().invalidate();
+            request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
+        }
     }
 
     /**
      * Method processes GET request for /delete-account url and
-     * deletes account
+     * forward to /delete-history url
      *
      * @param request
      * @param response
@@ -54,12 +66,8 @@ public class DeleteAccountServlet extends HttpServlet {
             Optional<UserDto> currentUser = Optional.of(
                     (UserDto) request.getSession().getAttribute("currentUser"));
 
-            userService.deleteUser(currentUser.get().getUserId());
-            request.setAttribute("successMessage", "Successful: account is deleted");
+            request.getRequestDispatcher(ServletUrl.DELETE_HISTORY).forward(request, response);
         } catch (RuntimeException e) {
-            request.setAttribute("failedMessage", "Failed: couldn't delete account");
-        } finally {
-            request.getSession().invalidate();
             request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
         }
     }

@@ -11,4 +11,5 @@ public interface JspUrl {
     String REGISTRATION = "/view/registration.jsp";
     String SEARCH_TRAINS = "/view/search-trains.jsp";
     String SHOW_HISTORY = "/view/show-history.jsp";
+    String DELETE_ACCOUNT = "/view/delete-account.jsp";
 }

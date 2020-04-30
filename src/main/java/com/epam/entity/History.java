@@ -2,7 +2,7 @@ package com.epam.entity;
 
 import java.math.BigDecimal;
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 public class History extends Entity {
 
@@ -21,6 +21,7 @@ public class History extends Entity {
         GET_BY_ID(SqlQuery.GET_BY_ID, "SELECT * FROM history WHERE HistoryID = ?;"),
         GET_BY_FIELD(SqlQuery.GET_BY_FIELD, "SELECT * FROM history WHERE UserID = ?;"),
         GET_ALL(SqlQuery.GET_ALL, "SELECT * FROM history"),
+        DELETE_BY_FIELD(SqlQuery.DELETE_BY_FIELD, "DELETE FROM history WHERE UserID = ?"),
         INSERT(SqlQuery.INSERT, "INSERT INTO history (TrainNumber, FromStation, ToStation, " +
                 "DepartureTime, ArrivalTime, DepartureDate, WagonNumber, PlaceNumber, Price, UserID) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");

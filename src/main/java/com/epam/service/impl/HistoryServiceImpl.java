@@ -52,4 +52,9 @@ public class HistoryServiceImpl implements HistoryService {
                 .map(new HistoryDtoMapper()::fromDtoToEntity)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public boolean delete(Long userId) {
+        return historyDao.deleteByFields(userId);
+    }
 }

@@ -2,7 +2,7 @@ package com.epam.dto;
 
 import java.math.BigDecimal;
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 public class HistoryDto {
     private Long HistoryId;

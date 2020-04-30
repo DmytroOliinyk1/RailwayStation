@@ -24,4 +24,6 @@ public interface HistoryService {
      * @return list objects of type HistoryDto
      */
     List<HistoryDto> getHistory(Long userId);
+
+    boolean delete(Long userId);
 }

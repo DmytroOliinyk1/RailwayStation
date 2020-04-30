@@ -23,7 +23,7 @@
     <a href="${pageContext.request.contextPath}/view/change-password.jsp">Change password</a>
 </div>
 <div class="float-left">
-    <a href="${pageContext.request.contextPath}/delete-account">Delete account</a>
+    <a href="${pageContext.request.contextPath}/view/delete-account.jsp">Delete account</a>
 </div>
 <div class="float-left">
     <a href="${pageContext.request.contextPath}/view/logout.jsp">Logout</a>
