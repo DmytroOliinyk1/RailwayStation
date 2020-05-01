@@ -55,7 +55,7 @@ public class DBConnection {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
-            throw new RuntimeException("couldn't get connection");
+            throw new RuntimeException(e);
         }
     }
 }

@@ -3,6 +3,7 @@ package com.epam.controller.user;
 import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.UserDto;
+import com.epam.exception.IncorrectDataException;
 import com.epam.service.UserService;
 import com.epam.service.impl.UserServiceImpl;
 import com.epam.util.LoginUtils;
@@ -43,8 +44,11 @@ public class ChangePasswordServlet extends HttpServlet {
         try {
             Optional<UserDto> currentUser = Optional.ofNullable(
                     (UserDto) request.getSession().getAttribute("currentUser"));
+
             if (LoginUtils.checkPassword(request.getParameter("newPassword"))) {
+
                 if (!currentUser.isPresent()) {
+
                     if (userService.changePassword(request.getParameter("newPassword"), request.getParameter("email"))) {
                         request.setAttribute("successMessage", "Successful: password changed");
                     } else {
@@ -52,7 +56,9 @@ public class ChangePasswordServlet extends HttpServlet {
                     }
 
                 } else {
+
                     if (currentUser.get().getEmail().equals(request.getParameter("email"))) {
+
                         if (userService.changePassword(request.getParameter("newPassword"), request.getParameter("email"))) {
                             request.setAttribute("successMessage", "Successful: password changed");
                         } else {
@@ -63,7 +69,7 @@ public class ChangePasswordServlet extends HttpServlet {
                     }
                 }
             } else {
-                throw new RuntimeException();
+                throw new IncorrectDataException("Password is empty");
             }
         } catch (RuntimeException e) {
             request.setAttribute("failedMessage", "Failed: couldn't change password ");

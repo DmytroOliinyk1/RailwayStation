@@ -3,6 +3,8 @@ package com.epam.controller.user;
 import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.UserDto;
+import com.epam.exception.IncorrectDataException;
+import com.epam.exception.NotFoundException;
 import com.epam.service.UserService;
 import com.epam.service.impl.UserServiceImpl;
 import com.epam.util.LoginUtils;
@@ -48,7 +50,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("currentUser", currentUser.get());
                 request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
             } else {
-                throw new RuntimeException();
+                throw new IncorrectDataException("Incorrect email or password");
             }
         } catch (RuntimeException e) {
             request.setAttribute("failedMessage", "Bad credentials");

@@ -51,7 +51,7 @@ public class DateUtils {
                     comparingDate.compareTo(sdf.parse(currentTime)) == 0;
         } catch (ParseException e) {
             e.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 }

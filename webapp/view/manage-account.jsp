@@ -1,11 +1,6 @@
 <%@ page import="com.epam.dto.UserDto" %>
-<%@ page import="com.epam.constants.jsp_url.JspUrl" %><%--
-  Created by IntelliJ IDEA.
-  User: Acer
-  Date: 25.04.2020
-  Time: 16:12
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.epam.constants.jsp_url.JspUrl" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

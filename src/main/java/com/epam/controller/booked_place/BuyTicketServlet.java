@@ -4,6 +4,8 @@ import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.BookedPlaceDto;
 import com.epam.dto.TrainDto;
+import com.epam.dto.UserDto;
+import com.epam.exception.NotFoundException;
 import com.epam.service.BookedPlaceService;
 import com.epam.service.impl.BookedPlaceServiceImpl;
 import com.epam.util.DateUtils;
@@ -44,51 +46,49 @@ public class BuyTicketServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getSession().getAttribute("currentUser") != null) {
+        try {
+            Optional<UserDto> userDto = Optional.of(
+                    (UserDto) request.getSession().getAttribute("currentUser")
+            );
 
-            try {
+            Optional<TrainDto> trainDto = Optional.of(
+                    (TrainDto) request.getSession().getAttribute("currentTrain"));
 
-                Optional<TrainDto> trainDto = Optional.of(
-                        (TrainDto) request.getSession().getAttribute("currentTrain"));
+            Long wagonNumber = Long.valueOf(request.getParameter("wagonNumber"));
 
-                Long wagonNumber = Long.valueOf(request.getParameter("wagonNumber"));
+            Long placeNumber = Long.valueOf(request.getParameter("placeNumber"));
 
-                Long placeNumber = Long.valueOf(request.getParameter("placeNumber"));
+            String date = request.getParameter("departureDate");
 
-                String date = request.getParameter("departureDate");
+            Date departureDate = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
 
-                Date departureDate = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
-
-                if (DateUtils.compareDateAndTime(departureDate, trainDto.get().getDepartureTime())) {
-                    throw new RuntimeException();
-                }
-
-                BookedPlaceDto bookedPlaceDto = new BookedPlaceDto(wagonNumber, placeNumber, departureDate,
-                        trainDto.get().getTrainId());
-
-                if (bookedPlaceService.getDisabledPlaces(bookedPlaceDto).isEmpty()) {
-                    bookedPlaceService.saveBookedPlace(bookedPlaceDto);
-                    request.setAttribute("currentBookedPlace", bookedPlaceDto);
-                    request.getRequestDispatcher("/save-ticket").forward(request, response);
-                } else {
-                    throw new RuntimeException();
-                }
-
-
-            } catch (ParseException e) {
-                request.setAttribute("message", "Failed: incorrect date");
-                request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
-            } catch (NumberFormatException e) {
-                request.setAttribute("message", "Failed: incorrect place or wagon number");
-                request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
-            } catch (RuntimeException e) {
-                request.setAttribute("message", "Failed: ticket is not purchased");
-                request.getRequestDispatcher("/view/search-trains.jsp").forward(request, response);
+            if (DateUtils.compareDateAndTime(departureDate, trainDto.get().getDepartureTime())) {
+                throw new RuntimeException("Train has already departed. Couldn't buy ticket");
             }
-        } else {
-            request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+
+            BookedPlaceDto bookedPlaceDto = new BookedPlaceDto(wagonNumber, placeNumber, departureDate,
+                    trainDto.get().getTrainId());
+
+            if (bookedPlaceService.getDisabledPlaces(bookedPlaceDto).isEmpty()) {
+                bookedPlaceService.saveBookedPlace(bookedPlaceDto);
+                request.setAttribute("currentBookedPlace", bookedPlaceDto);
+                request.getRequestDispatcher(ServletUrl.SAVE_TICKETS).forward(request, response);
+            } else {
+                throw new NotFoundException("Place is already occupied");
+            }
+
+        } catch (ParseException e) {
+            request.setAttribute("message", "Failed: incorrect date");
+            request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
+        } catch (NumberFormatException e) {
+            request.setAttribute("message", "Failed: incorrect place or wagon number");
+            request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
+        } catch (RuntimeException e) {
+            request.setAttribute("message", "Failed: ticket is not purchased");
+            request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }
     }
+
 
     /**
      * Method processes GET request for /buy-ticket url and

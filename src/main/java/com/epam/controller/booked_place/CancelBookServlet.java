@@ -30,7 +30,7 @@ public class CancelBookServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /cancel-book url and
-     * deletes booked place
+     * deletes booked place if happened trouble in /save-ticket servlet
      *
      * @param request
      * @param response
@@ -42,7 +42,7 @@ public class CancelBookServlet extends HttpServlet {
             Optional<BookedPlaceDto> currentBookedPlace = Optional.of(
                     (BookedPlaceDto) request.getAttribute("currentBookedPlace"));
             bookedPlaceService.cancelBook(currentBookedPlace.get());
-            request.setAttribute("message", "Failed: something was wrong");
+            request.setAttribute("message", "Failed: something was wrong while buying ticket");
         } catch (RuntimeException e) {
 
         } finally {

@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@WebServlet(name = "DeleteHistoryServlet", urlPatterns = "/delete-history")
+@WebServlet(name = "DeleteHistoryServlet", urlPatterns = ServletUrl.DELETE_HISTORY)
 public class DeleteHistoryServlet extends HttpServlet {
     private HistoryService historyService;
 
@@ -50,8 +50,7 @@ public class DeleteHistoryServlet extends HttpServlet {
             request.setAttribute("userHistoryList", userHistoryList);
 
             historyService.delete(currentUser.get().getUserId());
-            System.out.println("user history deleted");
-            request.getRequestDispatcher("/delete-booked-places").forward(request, response);
+            request.getRequestDispatcher(ServletUrl.DELETE_BOOKED_PLACES).forward(request, response);
         } catch (RuntimeException e) {
             request.setAttribute("message", "Failed: couldn't delete account. History is deleted");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);

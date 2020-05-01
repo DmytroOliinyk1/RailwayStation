@@ -3,6 +3,7 @@ package com.epam.dao.crud;
 import com.epam.dao.builder.InstanceBuilder;
 import com.epam.db.DBConnection;
 import com.epam.entity.SqlQuery;
+import com.epam.exception.NotFoundException;
 import com.epam.util.CrudUtils;
 
 import java.sql.Connection;
@@ -35,7 +36,7 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
         try (Connection connection = DBConnection.getConnection()) {
             return CrudUtils.getEntity(connection, builder, sqlQueries.get(SqlQuery.GET_BY_ID).toString(), id).get();
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new NotFoundException(e.getMessage());
         }
     }
 
@@ -45,14 +46,14 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
      *
      * @param builder
      * @param fields
-     * @return
+     * @return list objects type of TEntity
      */
     @Override
     public List<TEntity> getByFields(InstanceBuilder<TEntity> builder, Object... fields) {
         try (Connection connection = DBConnection.getConnection()) {
             return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_BY_FIELD).toString(), fields);
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new NotFoundException(e.getMessage());
         }
     }
 
@@ -69,7 +70,7 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
         try (Connection connection = DBConnection.getConnection()) {
             return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_ALL).toString(), params);
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new NotFoundException(e.getMessage());
         }
     }
 

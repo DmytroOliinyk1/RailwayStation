@@ -12,6 +12,6 @@ public interface ServletUrl {
     String DELETE_ACCOUNT = "/delete-account";
     String LOGIN = "/login";
     String REGISTRATION = "/registration";
-    String DELETE_HISTORY = "delete-history";
-    String DELETE_BOOKED_PLACES = "delete-booked-places";
+    String DELETE_HISTORY = "/delete-history";
+    String DELETE_BOOKED_PLACES = "/delete-booked-places";
 }

@@ -3,6 +3,7 @@ package com.epam.controller.train;
 import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.TrainDto;
+import com.epam.exception.NotFoundException;
 import com.epam.service.TrainService;
 import com.epam.service.impl.TrainServiceImpl;
 import com.epam.util.TrainSearchUtils;
@@ -50,7 +51,7 @@ public class SearchServlet extends HttpServlet {
                     request.setAttribute("trainList", trainDtoList);
                     request.getRequestDispatcher(JspUrl.AVAILABLE_TRAINS).forward(request, response);
                 } else {
-                    throw new RuntimeException();
+                    throw new NotFoundException("No available trains");
                 }
             } else {
                 request.setAttribute("message", "Empty field");

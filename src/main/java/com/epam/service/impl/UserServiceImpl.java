@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Method checks if user exist
+     * Method checks if user exists
      *
      * @param email
      * @param password

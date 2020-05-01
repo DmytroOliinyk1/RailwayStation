@@ -51,7 +51,7 @@ public class GetHistoryServlet extends HttpServlet {
             request.setAttribute("historyList", historyList);
             request.getRequestDispatcher(JspUrl.SHOW_HISTORY).forward(request, response);
         } catch (RuntimeException e) {
-            request.setAttribute("message", "Failed: some trouble");
+            request.setAttribute("message", "Failed: couldn't get history");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }
     }

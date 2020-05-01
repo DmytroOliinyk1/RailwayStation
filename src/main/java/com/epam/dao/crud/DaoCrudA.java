@@ -3,6 +3,9 @@ package com.epam.dao.crud;
 import com.epam.db.DBConnection;
 import com.epam.entity.Entity;
 import com.epam.entity.SqlQuery;
+import com.epam.exception.NotDeleteException;
+import com.epam.exception.NotSaveException;
+import com.epam.exception.NotUpdateException;
 import com.epam.util.CrudUtils;
 
 import java.sql.Connection;
@@ -43,7 +46,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
                     Arrays.copyOfRange(getFields(object), BEGIN_RANGE_WITHOUT_ID, getFields(object).length));
             return status == 1;
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new NotSaveException(e.getMessage());
         }
 
     }
@@ -63,7 +66,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
             );
             return status > 0;
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new NotUpdateException(e.getMessage());
         }
     }
 
@@ -75,12 +78,12 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
      */
     @Override
     public boolean updateByFields(Object... fieldsValues) {
-        try (Connection connection = DBConnection.getConnection();) {
+        try (Connection connection = DBConnection.getConnection()) {
             int status = CrudUtils.update(
                     connection, sqlQueries.get(SqlQuery.UPDATE_BY_FIELD).toString(), fieldsValues);
             return status > 0;
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new NotUpdateException(e.getMessage());
         }
 
 
@@ -100,7 +103,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
             );
             return status == 1;
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new NotDeleteException(e.getMessage());
         }
     }
 
@@ -118,7 +121,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
             );
             return status > 0;
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new NotDeleteException(e.getMessage());
         }
 
     }

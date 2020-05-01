@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class TrainSearchUtils {
     /**
-     * Method compares input rout to regex
+     * Method compares input route to regex
      *
      * @param from
      * @param to
@@ -13,8 +13,6 @@ public class TrainSearchUtils {
      */
     public static boolean checkRoute(String from, String to) {
         Pattern pattern = Pattern.compile("^([A-Za-z]+)$");
-        Matcher fromMatcher = pattern.matcher(from);
-        Matcher toMatcher = pattern.matcher(to);
-        return fromMatcher.find() && toMatcher.find();
+        return pattern.matcher(from).find() && pattern.matcher(to).find();
     }
 }

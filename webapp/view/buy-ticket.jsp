@@ -1,12 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.epam.dto.UserDto" %>
-<%@ page import="com.epam.constants.jsp_url.JspUrl" %><%--
-  Created by IntelliJ IDEA.
-  User: Acer
-  Date: 26.04.2020
-  Time: 16:29
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.epam.constants.jsp_url.JspUrl" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -62,7 +57,7 @@
             <div class="card-body">
 
                 <div class="form-group">
-                    <label>Enter your name</label>
+                    <label>Your name</label>
                     <input type="text" class="form-control" name="name" value="${currentUser.name}"placeholder="name"
                            readonly/>
 
@@ -70,7 +65,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Enter your surname</label>
+                    <label>Your surname</label>
                     <input type="text" class="form-control" name="surname" value="${currentUser.surname}" placeholder="surname"
                            readonly/>
                 </div>

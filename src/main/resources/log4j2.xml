@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="INFO">
+
+    <Properties>
+        <Property name="LOG_PATTERN">[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</Property>
+        <Property name="logs">/my-epam-project/logs</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile
+                name="roll-by-size"
+                fileName="logs/exceptions.log"
+                filePattern="logs/exceptions-%d{yyyy-MM-dd}.%i.log.gz"
+                maxBackupIndex="3"
+                ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="25"/>
+        </RollingFile>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO" additivity="false">
+            <AppenderRef ref="roll-by-size" level="ERROR"/>
+            <AppenderRef ref="console" level="INFO"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -12,8 +12,7 @@ public class LoginUtils {
      */
     public static boolean checkEmail(String email) {
         Pattern pattern = Pattern.compile("^(.+)@(.+)\\.(\\w{2,5})$");
-        Matcher matcher = pattern.matcher(email);
-        return matcher.find();
+        return pattern.matcher(email).find();
     }
 
     /**
@@ -25,9 +24,7 @@ public class LoginUtils {
      */
     public static boolean checkName(String name, String surname) {
         Pattern pattern = Pattern.compile("^([A-Za-z]+)$");
-        Matcher matcherName = pattern.matcher(name);
-        Matcher matcherSurname = pattern.matcher(surname);
-        return matcherName.find() && matcherSurname.find();
+        return pattern.matcher(name).find() && pattern.matcher(surname).find();
     }
 
     /**
@@ -38,8 +35,7 @@ public class LoginUtils {
      */
     public static boolean checkPassword(String password) {
         Pattern pattern = Pattern.compile("^(.+)$");
-        Matcher matcher = pattern.matcher(password);
-        return matcher.find();
+        return pattern.matcher(password).find();
     }
 
 }

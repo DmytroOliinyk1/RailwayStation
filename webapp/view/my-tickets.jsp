@@ -1,12 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.epam.dto.UserDto" %>
-<%@ page import="com.epam.constants.jsp_url.JspUrl" %><%--
-  Created by IntelliJ IDEA.
-  User: Acer
-  Date: 28.04.2020
-  Time: 13:14
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.epam.constants.jsp_url.JspUrl" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

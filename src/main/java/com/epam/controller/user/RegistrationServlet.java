@@ -5,6 +5,7 @@ import com.epam.constants.servlet_url.ServletUrl;
 import com.epam.dto.UserDto;
 import com.epam.dto.mapper.UserDtoMapper;
 import com.epam.entity.User;
+import com.epam.exception.IncorrectDataException;
 import com.epam.service.UserService;
 import com.epam.service.impl.UserServiceImpl;
 import com.epam.util.LoginUtils;
@@ -54,7 +55,7 @@ public class RegistrationServlet extends HttpServlet {
                 userService.save(userDto);
                 request.setAttribute("successMessage", "Successful: account created");
             } else {
-                throw new RuntimeException();
+                throw new IncorrectDataException("Incorrect input data");
             }
         } catch (RuntimeException e) {
             request.setAttribute("failedMessage", "Failed: couldn't create account");
@@ -74,6 +75,6 @@ public class RegistrationServlet extends HttpServlet {
      * @throws IOException
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
+        request.getRequestDispatcher(JspUrl.REGISTRATION).forward(request, response);
     }
 }

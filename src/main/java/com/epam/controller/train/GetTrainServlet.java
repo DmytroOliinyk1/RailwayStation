@@ -33,7 +33,7 @@ public class GetTrainServlet extends HttpServlet {
     }
 
     /**
-     * Method processes POST request for /get-train url and
+     * Method processes POST request for /get-train url
      *
      * @param request
      * @param response

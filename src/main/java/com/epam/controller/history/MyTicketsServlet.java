@@ -69,7 +69,7 @@ public class MyTicketsServlet extends HttpServlet {
             request.setAttribute("myTicketsList", myTicketsList);
             request.getRequestDispatcher(JspUrl.MY_TICKETS).forward(request, response);
         } catch (RuntimeException e) {
-            request.setAttribute("message", "Some trouble");
+            request.setAttribute("message", "Failed: couldn't get history");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }
     }

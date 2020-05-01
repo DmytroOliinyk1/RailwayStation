@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "DeleteBookedPlacesServlet", urlPatterns = "/delete-booked-places")
+@WebServlet(name = "DeleteBookedPlacesServlet", urlPatterns = ServletUrl.DELETE_BOOKED_PLACES)
 public class DeleteBookedPlacesServlet extends HttpServlet {
     private BookedPlaceService bookedPlaceService;
 
@@ -48,7 +48,6 @@ public class DeleteBookedPlacesServlet extends HttpServlet {
         try {
             List<HistoryDto> userHistoryList = (ArrayList<HistoryDto>) request.getAttribute("userHistoryList");
 
-
             userHistoryList.stream()
                     .forEach(historyDto ->
                             bookedPlaceService.cancelBook(
@@ -64,12 +63,14 @@ public class DeleteBookedPlacesServlet extends HttpServlet {
                                                             trainDto.getDepartureTime()
                                                                     .compareTo(historyDto.getDepartureTime()) == 0)
                                                     .collect(Collectors.toList())
-                                                    .get(0).getTrainId()
+                                                    .get(0)
+                                                    .getTrainId()
                                     )
                             ));
             request.getRequestDispatcher(ServletUrl.DELETE_ACCOUNT).forward(request, response);
         } catch (RuntimeException e) {
-            request.setAttribute("message", "Failed: couldn't delete account. History is deleted");
+            request.setAttribute("message",
+                    "Failed: couldn't delete account. Your history and tickets is deleted");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }
     }
