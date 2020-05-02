@@ -12,7 +12,7 @@ public class TrainSearchUtils {
      * @return boolean result of comparing
      */
     public static boolean checkRoute(String from, String to) {
-        Pattern pattern = Pattern.compile("^([A-Za-z]+)$");
+        Pattern pattern = Pattern.compile("^[A-Z]([a-z]+)$");
         return pattern.matcher(from).find() && pattern.matcher(to).find();
     }
 }

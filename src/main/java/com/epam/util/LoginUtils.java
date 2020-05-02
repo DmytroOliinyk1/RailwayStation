@@ -23,7 +23,7 @@ public class LoginUtils {
      * @return boolean result of comparing
      */
     public static boolean checkName(String name, String surname) {
-        Pattern pattern = Pattern.compile("^([A-Za-z]+)$");
+        Pattern pattern = Pattern.compile("^[A-Z]([a-z]+)$");
         return pattern.matcher(name).find() && pattern.matcher(surname).find();
     }
 
