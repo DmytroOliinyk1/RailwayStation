@@ -2,6 +2,7 @@ package com.epam.controller.history;
 
 import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
+import com.epam.controller.user.LoginServlet;
 import com.epam.dto.BookedPlaceDto;
 import com.epam.dto.TrainDto;
 import com.epam.dto.UserDto;
@@ -16,8 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet(name = "SaveTicketServlet", urlPatterns = ServletUrl.SAVE_TICKETS)
 public class SaveTicketServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SaveTicketServlet.class);
+
     private HistoryService historyService;
 
     /**
@@ -50,12 +57,13 @@ public class SaveTicketServlet extends HttpServlet {
             Optional<UserDto> currentUser =
                     Optional.of((UserDto) request.getSession().getAttribute("currentUser"));
 
-
             historyService.saveTicket(
                     currentBookedPlace.get(), currentTrain.get(), currentUser.get().getUserId()
             );
+            LOGGER.info("Saved user's history in database");
             request.getRequestDispatcher(ServletUrl.GET_HISTORY).forward(request, response);
         } catch (RuntimeException e) {
+            LOGGER.error("RuntimeException: " + e.getMessage());
             request.setAttribute(
                     "currentBookedPlace", request.getAttribute("currentBookedPlace"));
             request.getRequestDispatcher(ServletUrl.CANCEL_BOOK).forward(request, response);

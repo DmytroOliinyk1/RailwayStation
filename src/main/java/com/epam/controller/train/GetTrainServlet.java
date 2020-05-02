@@ -2,6 +2,7 @@ package com.epam.controller.train;
 
 import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
+import com.epam.controller.user.LoginServlet;
 import com.epam.dto.TrainDto;
 import com.epam.dto.UserDto;
 import com.epam.service.TrainService;
@@ -18,8 +19,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet(name = "GetTrainServlet", urlPatterns = ServletUrl.GET_TRAIN)
 public class GetTrainServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GetTrainServlet.class);
+
     TrainService trainService;
 
     /**
@@ -55,22 +62,22 @@ public class GetTrainServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Optional<TrainDto> currentTrain = Optional.of(
-                    trainService.getTrain(Long.valueOf(request.getParameter("trainId")))
-            );
-
             Optional<UserDto> currentUser = Optional.of(
                     (UserDto) request.getSession().getAttribute("currentUser")
+            );
+
+            Optional<TrainDto> currentTrain = Optional.of(
+                    trainService.getTrain(Long.valueOf(request.getParameter("trainId")))
             );
 
             request.getSession().setAttribute("currentTrain", currentTrain.get());
             request.setAttribute("currentDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
             request.setAttribute("currentDatePlusMonth",
                     new SimpleDateFormat("yyyy-MM-dd").format(DateUtils.currentDatePlusMonth()));
-
+            LOGGER.info("Got train from database");
             request.getRequestDispatcher(JspUrl.BUY_TICKETS).forward(request, response);
-
         } catch (RuntimeException e) {
+            LOGGER.error("RuntimeException: " + e.getMessage());
             request.setAttribute("message", "Train not found");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }

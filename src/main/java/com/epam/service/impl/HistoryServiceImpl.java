@@ -12,7 +12,9 @@ import com.epam.service.HistoryService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class HistoryServiceImpl implements HistoryService {
+
     private HistoryDao historyDao;
 
     public HistoryServiceImpl() {

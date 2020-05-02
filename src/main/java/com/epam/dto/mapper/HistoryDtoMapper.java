@@ -1,11 +1,18 @@
 package com.epam.dto.mapper;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.dto.HistoryDto;
 import com.epam.dto.HistoryDto;
 import com.epam.entity.Entity;
 import com.epam.entity.History;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class HistoryDtoMapper implements DtoMapper<HistoryDto> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HistoryDtoMapper.class);
+
     /**
      * Method converts Entity to HistoryDto
      *
@@ -27,6 +34,7 @@ public class HistoryDtoMapper implements DtoMapper<HistoryDto> {
         historyDto.setPlaceNumber(history.getPlaceNumber());
         historyDto.setPrice(history.getPrice());
         historyDto.setUserId(history.getUserId());
+        LOGGER.info("Created HistoryDto from History");
         return historyDto;
     }
 }

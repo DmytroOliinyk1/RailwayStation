@@ -1,9 +1,16 @@
 package com.epam.dao;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.dao.crud.DaoCrudA;
 import com.epam.entity.History;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class HistoryDao extends DaoCrudA<History> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HistoryDao.class);
+
     /**
      * Method gets fields of History and
      * put them in array
@@ -36,5 +43,6 @@ public class HistoryDao extends DaoCrudA<History> {
         for (History.historySqlQuery historySqlQuery : History.historySqlQuery.values()) {
             sqlQueries.put(historySqlQuery.getSqlQuery(), historySqlQuery);
         }
+        LOGGER.info("Put History's sqlQueries in Map sqlQueries");
     }
 }

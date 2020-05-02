@@ -1,9 +1,16 @@
 package com.epam.dao;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.dao.crud.DaoCrudA;
 import com.epam.entity.BookedPlace;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class BookedPlaceDao extends DaoCrudA<BookedPlace> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookedPlaceDao.class);
+
     /**
      * Method gets fields of BookedPlace and
      * put them in array
@@ -30,6 +37,7 @@ public class BookedPlaceDao extends DaoCrudA<BookedPlace> {
         for (BookedPlace.bookedPlaceSqlQuery bookedPlaceSqlQuery : BookedPlace.bookedPlaceSqlQuery.values()) {
             sqlQueries.put(bookedPlaceSqlQuery.getSqlQuery(), bookedPlaceSqlQuery);
         }
+        LOGGER.info("Put BookedPlace's sqlQueries in Map sqlQueries");
     }
 
 

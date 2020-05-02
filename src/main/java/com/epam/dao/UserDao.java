@@ -1,9 +1,16 @@
 package com.epam.dao;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.dao.crud.DaoCrudA;
 import com.epam.entity.User;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class UserDao extends DaoCrudA<User> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
+
     /**
      * Method gets fields of User and
      * put them in array
@@ -30,5 +37,6 @@ public class UserDao extends DaoCrudA<User> {
         for (User.userSqlQuery userSqlQuery : User.userSqlQuery.values()) {
             sqlQueries.put(userSqlQuery.getSqlQuery(), userSqlQuery);
         }
+        LOGGER.info("Put User's sqlQueries in Map sqlQueries");
     }
 }

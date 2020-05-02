@@ -17,8 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet(name = "RegistrationServlet", urlPatterns = ServletUrl.REGISTRATION)
 public class RegistrationServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationServlet.class);
+
     UserService userService;
 
     /**
@@ -54,10 +60,12 @@ public class RegistrationServlet extends HttpServlet {
 
                 userService.save(userDto);
                 request.setAttribute("successMessage", "Successful: account created");
+                LOGGER.info("Saved  user in database");
             } else {
                 throw new IncorrectDataException("Incorrect input data");
             }
         } catch (RuntimeException e) {
+            LOGGER.error("RuntimeException: " + e.getMessage());
             request.setAttribute("failedMessage", "Failed: couldn't create account");
         } finally {
             request.getSession().invalidate();

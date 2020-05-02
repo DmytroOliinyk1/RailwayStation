@@ -2,6 +2,7 @@ package com.epam.controller.history;
 
 import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
+import com.epam.controller.user.LoginServlet;
 import com.epam.dto.HistoryDto;
 import com.epam.dto.UserDto;
 import com.epam.service.HistoryService;
@@ -18,8 +19,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet(name = "MyTicketsServlet", urlPatterns = ServletUrl.MY_TICKETS)
 public class MyTicketsServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyTicketsServlet.class);
+
     private HistoryService historyService;
 
     /**
@@ -65,10 +72,11 @@ public class MyTicketsServlet extends HttpServlet {
                     .filter(historyDto ->
                             historyDto.getDepartureDate().compareTo(DateUtils.currentDateMinusDay()) >= 0)
                     .collect(Collectors.toList());
-
+            LOGGER.info("Got user's history from database");
             request.setAttribute("myTicketsList", myTicketsList);
             request.getRequestDispatcher(JspUrl.MY_TICKETS).forward(request, response);
         } catch (RuntimeException e) {
+            LOGGER.error("RuntimeException: " + e.getMessage());
             request.setAttribute("message", "Failed: couldn't get history");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }

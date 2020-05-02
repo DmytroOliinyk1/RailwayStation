@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookedPlaceServiceImpl implements BookedPlaceService {
+
     private BookedPlaceDao bookedPlaceDao;
 
     public BookedPlaceServiceImpl() {

@@ -1,11 +1,18 @@
 package com.epam.dao.builder;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class UserBuilder implements InstanceBuilder<User> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserBuilder.class);
+
     /**
      * Method creates object type of User from ResultSet
      *
@@ -21,9 +28,10 @@ public class UserBuilder implements InstanceBuilder<User> {
             user.setPassword(resultSet.getString("Password"));
             user.setName(resultSet.getString("Name"));
             user.setSurname(resultSet.getString("Surname"));
+            LOGGER.info("Created User from ResultSet");
             return user;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new RuntimeException();
         }
     }

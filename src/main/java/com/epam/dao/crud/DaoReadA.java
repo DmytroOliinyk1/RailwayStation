@@ -1,5 +1,6 @@
 package com.epam.dao.crud;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.dao.builder.InstanceBuilder;
 import com.epam.db.DBConnection;
 import com.epam.entity.SqlQuery;
@@ -12,7 +13,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DaoReadA.class);
+
     protected final Map<Enum<?>, Enum<?>> sqlQueries;
 
     /**
@@ -36,6 +43,7 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
         try (Connection connection = DBConnection.getConnection()) {
             return CrudUtils.getEntity(connection, builder, sqlQueries.get(SqlQuery.GET_BY_ID).toString(), id).get();
         } catch (SQLException e) {
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new NotFoundException(e.getMessage());
         }
     }
@@ -53,6 +61,7 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
         try (Connection connection = DBConnection.getConnection()) {
             return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_BY_FIELD).toString(), fields);
         } catch (SQLException e) {
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new NotFoundException(e.getMessage());
         }
     }
@@ -70,6 +79,7 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
         try (Connection connection = DBConnection.getConnection()) {
             return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_ALL).toString(), params);
         } catch (SQLException e) {
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new NotFoundException(e.getMessage());
         }
     }

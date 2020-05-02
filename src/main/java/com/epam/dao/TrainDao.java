@@ -1,9 +1,16 @@
 package com.epam.dao;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.dao.crud.DaoCrudA;
 import com.epam.entity.Train;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class TrainDao extends DaoCrudA<Train> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TrainDao.class);
+
     /**
      * Method gets fields of Train and
      * put them in array
@@ -34,5 +41,6 @@ public class TrainDao extends DaoCrudA<Train> {
         for (Train.trainSqlQuery trainSqlQuery : Train.trainSqlQuery.values()) {
             sqlQueries.put(trainSqlQuery.getSqlQuery(), trainSqlQuery);
         }
+        LOGGER.info("Put Train's sqlQueries in Map sqlQueries");
     }
 }

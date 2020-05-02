@@ -1,12 +1,19 @@
 package com.epam.dao.builder;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.entity.History;
 import com.epam.entity.Train;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class HistoryBuilder implements InstanceBuilder<History> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HistoryBuilder.class);
+
     /**
      * Method creates object type of History from ResultSet
      *
@@ -28,9 +35,10 @@ public class HistoryBuilder implements InstanceBuilder<History> {
             history.setPlaceNumber(resultSet.getLong("PlaceNumber"));
             history.setPrice(resultSet.getBigDecimal("Price"));
             history.setUserId(resultSet.getLong("UserID"));
+            LOGGER.info("Created History from ResultSet");
             return history;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new RuntimeException();
         }
     }

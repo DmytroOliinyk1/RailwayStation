@@ -2,6 +2,7 @@ package com.epam.controller.train;
 
 import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
+import com.epam.controller.user.LoginServlet;
 import com.epam.dto.TrainDto;
 import com.epam.exception.NotFoundException;
 import com.epam.service.TrainService;
@@ -16,8 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet(name = "SearchServlet", urlPatterns = ServletUrl.SEARCH_TRAINS)
 public class SearchServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SearchServlet.class);
+
     TrainService trainService;
 
     /**
@@ -48,16 +55,19 @@ public class SearchServlet extends HttpServlet {
                         request.getParameter("fromStation"), request.getParameter("toStation")
                 );
                 if (!trainDtoList.isEmpty()) {
+                    LOGGER.info("Got available trains from database");
                     request.setAttribute("trainList", trainDtoList);
                     request.getRequestDispatcher(JspUrl.AVAILABLE_TRAINS).forward(request, response);
                 } else {
                     throw new NotFoundException("No available trains");
                 }
             } else {
+                LOGGER.warn("Empty input field");
                 request.setAttribute("message", "Empty field");
                 request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
             }
         } catch (RuntimeException e) {
+            LOGGER.error("RuntimeException: " + e.getMessage());
             request.setAttribute("message", "No available trains");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }

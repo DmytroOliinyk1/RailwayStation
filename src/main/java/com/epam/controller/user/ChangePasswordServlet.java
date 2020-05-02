@@ -16,8 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet(name = "ChangePasswordServlet", urlPatterns = ServletUrl.CHANGE_PASSWORD)
 public class ChangePasswordServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ChangePasswordServlet.class);
+
     UserService userService;
 
     /**
@@ -49,9 +55,12 @@ public class ChangePasswordServlet extends HttpServlet {
 
                 if (!currentUser.isPresent()) {
 
-                    if (userService.changePassword(request.getParameter("newPassword"), request.getParameter("email"))) {
+                    if (userService.changePassword(
+                            request.getParameter("newPassword"), request.getParameter("email"))) {
+                        LOGGER.info("Changed password for login user");
                         request.setAttribute("successMessage", "Successful: password changed");
                     } else {
+                        LOGGER.info("Couldn't change password for login user");
                         request.setAttribute("failedMessage", "Failed: couldn't change password ");
                     }
 
@@ -59,9 +68,12 @@ public class ChangePasswordServlet extends HttpServlet {
 
                     if (currentUser.get().getEmail().equals(request.getParameter("email"))) {
 
-                        if (userService.changePassword(request.getParameter("newPassword"), request.getParameter("email"))) {
+                        if (userService.changePassword(
+                                request.getParameter("newPassword"), request.getParameter("email"))) {
+                            LOGGER.info("Changed password for logout user");
                             request.setAttribute("successMessage", "Successful: password changed");
                         } else {
+                            LOGGER.info("Couldn't change password for logout user");
                             request.setAttribute("failedMessage", "Failed: couldn't change password ");
                         }
                     } else {
@@ -72,6 +84,7 @@ public class ChangePasswordServlet extends HttpServlet {
                 throw new IncorrectDataException("Password is empty");
             }
         } catch (RuntimeException e) {
+            LOGGER.error("RuntimeException:" + e.getMessage());
             request.setAttribute("failedMessage", "Failed: couldn't change password ");
         } finally {
             request.getSession().invalidate();

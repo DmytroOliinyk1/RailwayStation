@@ -1,5 +1,6 @@
 package com.epam.util;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.dao.builder.InstanceBuilder;
 
 import java.math.BigDecimal;
@@ -14,7 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class CrudUtils {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CrudUtils.class);
+
     /**
      * Method gets object of type TEntity
      * from database
@@ -37,7 +44,7 @@ public class CrudUtils {
             }
             return Optional.empty();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("SQLException: "+e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -65,7 +72,7 @@ public class CrudUtils {
                 return entityList;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("SQLException: "+e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -84,7 +91,7 @@ public class CrudUtils {
             setArgsToStatement(preparedStatement, args);
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("SQLException: "+e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -113,7 +120,7 @@ public class CrudUtils {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("SQLException: "+e.getMessage());
             throw new RuntimeException(e);
         }
     }

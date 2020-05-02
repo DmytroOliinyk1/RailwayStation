@@ -2,6 +2,7 @@ package com.epam.controller.booked_place;
 
 import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
+import com.epam.controller.user.LoginServlet;
 import com.epam.dto.BookedPlaceDto;
 import com.epam.dto.TrainDto;
 import com.epam.dto.UserDto;
@@ -21,8 +22,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet(name = "BuyTicketServlet", urlPatterns = ServletUrl.BUY_TICKETS)
 public class BuyTicketServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BuyTicketServlet.class);
+
     private BookedPlaceService bookedPlaceService;
 
     /**
@@ -71,6 +78,7 @@ public class BuyTicketServlet extends HttpServlet {
 
             if (bookedPlaceService.getDisabledPlaces(bookedPlaceDto).isEmpty()) {
                 bookedPlaceService.saveBookedPlace(bookedPlaceDto);
+                LOGGER.info("Saved booked place in database");
                 request.setAttribute("currentBookedPlace", bookedPlaceDto);
                 request.getRequestDispatcher(ServletUrl.SAVE_TICKETS).forward(request, response);
             } else {
@@ -78,12 +86,15 @@ public class BuyTicketServlet extends HttpServlet {
             }
 
         } catch (ParseException e) {
+            LOGGER.error("ParseException: " + e.getMessage());
             request.setAttribute("message", "Failed: incorrect date");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         } catch (NumberFormatException e) {
+            LOGGER.error("NumberFormatException: " + e.getMessage());
             request.setAttribute("message", "Failed: incorrect place or wagon number");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         } catch (RuntimeException e) {
+            LOGGER.error("RuntimeException: " + e.getMessage());
             request.setAttribute("message", "Failed: ticket is not purchased");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
         }

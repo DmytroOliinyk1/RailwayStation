@@ -1,10 +1,17 @@
 package com.epam.dto.mapper;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.dto.UserDto;
 import com.epam.entity.Entity;
 import com.epam.entity.User;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class UserDtoMapper implements DtoMapper<UserDto> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDtoMapper.class);
+
     /**
      * Method converts Entity to UserDto
      *
@@ -20,6 +27,7 @@ public class UserDtoMapper implements DtoMapper<UserDto> {
         userDto.setPassword(user.getPassword());
         userDto.setName(user.getName());
         userDto.setSurname(user.getSurname());
+        LOGGER.info("Created UserDto from User");
         return userDto;
     }
 }

@@ -3,18 +3,19 @@
 <Configuration status="INFO">
 
     <Properties>
-        <Property name="LOG_PATTERN">[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</Property>
-        <Property name="logs">/my-epam-project/logs</Property>
+        <Property name="LOG_PATTERN">[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1}: %msg%n</Property>
+        <Property name="logs">/logs</Property>
     </Properties>
+
     <Appenders>
         <RollingFile
-                name="roll-by-size"
-                fileName="logs/exceptions.log"
-                filePattern="logs/exceptions-%d{yyyy-MM-dd}.%i.log.gz"
-                maxBackupIndex="3"
+                name="errors"
+                fileName="C:\Users\Acer\Desktop\my-epam-project\logs\errors\error_logs.log"
+                filePattern="C:\Users\Acer\Desktop\my-epam-project\logs\errors\error_logs-%d{yyyy-MM-dd}.%i.log"
+                maxBackupIndex="10"
                 ignoreExceptions="false">
             <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>
+                <Pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1}: %msg%n</Pattern>
             </PatternLayout>
             <Policies>
                 <OnStartupTriggeringPolicy />
@@ -22,15 +23,23 @@
             </Policies>
             <DefaultRolloverStrategy max="25"/>
         </RollingFile>
+        <File name="AllLogs" fileName="C:\Users\Acer\Desktop\my-epam-project\logs\all.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </File>
 
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
+
     </Appenders>
+
     <Loggers>
-        <Root level="INFO" additivity="false">
-            <AppenderRef ref="roll-by-size" level="ERROR"/>
-            <AppenderRef ref="console" level="INFO"/>
+        <Root level="trace" additivity="false">
+            <AppenderRef ref="AllLogs"/>
+            <AppenderRef ref="errors" level="ERROR"/>
+            <AppenderRef ref="console"/>
         </Root>
     </Loggers>
+
 </Configuration>
+

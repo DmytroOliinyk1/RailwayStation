@@ -2,6 +2,7 @@ package com.epam.controller.booked_place;
 
 import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
+import com.epam.controller.user.LoginServlet;
 import com.epam.dto.BookedPlaceDto;
 import com.epam.dto.HistoryDto;
 import com.epam.service.BookedPlaceService;
@@ -20,8 +21,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet(name = "DeleteBookedPlacesServlet", urlPatterns = ServletUrl.DELETE_BOOKED_PLACES)
 public class DeleteBookedPlacesServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DeleteBookedPlacesServlet.class);
+
     private BookedPlaceService bookedPlaceService;
 
     /**
@@ -67,8 +74,10 @@ public class DeleteBookedPlacesServlet extends HttpServlet {
                                                     .getTrainId()
                                     )
                             ));
+            LOGGER.info("Deleted user's booked places from database");
             request.getRequestDispatcher(ServletUrl.DELETE_ACCOUNT).forward(request, response);
         } catch (RuntimeException e) {
+            LOGGER.error("RuntimeException: " + e.getMessage());
             request.setAttribute("message",
                     "Failed: couldn't delete account. Your history and tickets is deleted");
             request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);

@@ -9,9 +9,9 @@ import com.epam.service.UserService;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class UserServiceImpl implements UserService {
+
     private UserDao userDao;
 
     public UserServiceImpl() {

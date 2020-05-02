@@ -5,7 +5,13 @@ import com.epam.entity.BookedPlace;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class BookedPlaceBuilder implements InstanceBuilder<BookedPlace> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookedPlaceBuilder.class);
+
     /**
      * Method creates object type of BookedPlace from ResultSet
      *
@@ -21,9 +27,10 @@ public class BookedPlaceBuilder implements InstanceBuilder<BookedPlace> {
             bookedPlace.setPlaceNumber(resultSet.getLong("PlaceNumber"));
             bookedPlace.setDepartureDate(resultSet.getDate("DepartureDate"));
             bookedPlace.setTrainId(resultSet.getLong("TrainID"));
+            LOGGER.info("Created BookedPlace from ResultSet");
             return bookedPlace;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new RuntimeException();
         }
     }

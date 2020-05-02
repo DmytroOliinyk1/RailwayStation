@@ -1,9 +1,10 @@
 package com.epam.util;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginUtils {
+
+
     /**
      * Method compares email to regex
      *

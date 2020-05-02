@@ -1,9 +1,9 @@
 package com.epam.util;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TrainSearchUtils {
+
     /**
      * Method compares input route to regex
      *

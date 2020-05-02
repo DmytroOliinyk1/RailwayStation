@@ -18,8 +18,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet(name = "LoginServlet", urlPatterns = ServletUrl.LOGIN)
 public class LoginServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginServlet.class);
+
     private UserService userService;
 
     /**
@@ -46,6 +52,7 @@ public class LoginServlet extends HttpServlet {
                     LoginUtils.checkPassword(request.getParameter("password"))) {
                 Optional<UserDto> currentUser = Optional.of(
                         userService.login(request.getParameter("email"), request.getParameter("password")));
+                LOGGER.info("Login user");
                 HttpSession session = request.getSession();
                 session.setAttribute("currentUser", currentUser.get());
                 request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
@@ -53,6 +60,7 @@ public class LoginServlet extends HttpServlet {
                 throw new IncorrectDataException("Incorrect email or password");
             }
         } catch (RuntimeException e) {
+            LOGGER.info("RuntimeException: " + e.getMessage());
             request.setAttribute("failedMessage", "Bad credentials");
             request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
         }

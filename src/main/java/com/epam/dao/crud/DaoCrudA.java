@@ -1,5 +1,6 @@
 package com.epam.dao.crud;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.db.DBConnection;
 import com.epam.entity.Entity;
 import com.epam.entity.SqlQuery;
@@ -12,7 +13,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity> implements DaoCrudI<TEntity> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DaoCrudA.class);
 
     private final int BEGIN_RANGE_WITHOUT_ID = 1;
 
@@ -46,6 +52,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
                     Arrays.copyOfRange(getFields(object), BEGIN_RANGE_WITHOUT_ID, getFields(object).length));
             return status == 1;
         } catch (SQLException e) {
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new NotSaveException(e.getMessage());
         }
 
@@ -66,6 +73,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
             );
             return status > 0;
         } catch (SQLException e) {
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new NotUpdateException(e.getMessage());
         }
     }
@@ -83,6 +91,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
                     connection, sqlQueries.get(SqlQuery.UPDATE_BY_FIELD).toString(), fieldsValues);
             return status > 0;
         } catch (SQLException e) {
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new NotUpdateException(e.getMessage());
         }
 
@@ -103,6 +112,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
             );
             return status == 1;
         } catch (SQLException e) {
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new NotDeleteException(e.getMessage());
         }
     }
@@ -121,6 +131,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
             );
             return status > 0;
         } catch (SQLException e) {
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new NotDeleteException(e.getMessage());
         }
 

@@ -1,10 +1,17 @@
 package com.epam.dto.mapper;
 
+import com.epam.controller.user.LoginServlet;
 import com.epam.dto.TrainDto;
 import com.epam.entity.Entity;
 import com.epam.entity.Train;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class TrainDtoMapper implements DtoMapper<TrainDto> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TrainDtoMapper.class);
+
     /**
      * Method converts Entity to TrainDto
      *
@@ -24,6 +31,7 @@ public class TrainDtoMapper implements DtoMapper<TrainDto> {
         trainDto.setWagonsQuantity(train.getWagonsQuantity());
         trainDto.setPlacesQuantity(train.getPlacesQuantity());
         trainDto.setPrice(train.getPrice());
+        LOGGER.info("Created TrainDto from Train");
         return trainDto;
     }
 }

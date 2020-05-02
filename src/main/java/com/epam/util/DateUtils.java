@@ -7,7 +7,14 @@ import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.epam.controller.user.LoginServlet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DateUtils {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DateUtils.class);
+
     /**
      * Method adds one month to current date
      *
@@ -19,6 +26,7 @@ public class DateUtils {
         calendar.add(Calendar.MONTH, 1);
         Date date = new Date();
         date.setTime(calendar.getTimeInMillis());
+        LOGGER.info("Added one month to current date");
         return date;
     }
 
@@ -33,6 +41,7 @@ public class DateUtils {
         calendar.add(Calendar.DATE, -1);
         Date date = new Date();
         date.setTime(calendar.getTimeInMillis());
+        LOGGER.info("Subtract one day from current date");
         return date;
     }
 
@@ -50,7 +59,7 @@ public class DateUtils {
             return LocalTime.now().isAfter(LocalTime.parse(String.valueOf(time))) &&
                     comparingDate.compareTo(sdf.parse(currentTime)) == 0;
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOGGER.error("ParseException: "+ e.getMessage());
             throw new RuntimeException(e);
         }
     }
