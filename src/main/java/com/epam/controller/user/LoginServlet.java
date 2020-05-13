@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
                 throw new IncorrectDataException("Incorrect email or password");
             }
         } catch (RuntimeException e) {
-            LOGGER.info("RuntimeException: " + e.getMessage());
+            LOGGER.error("RuntimeException: " + e.getMessage());
             request.setAttribute("failedMessage", "Bad credentials");
             request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
         }

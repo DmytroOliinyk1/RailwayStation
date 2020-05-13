@@ -48,10 +48,10 @@ public class DBConnection {
             LOGGER.info("Initialized datasource");
 
         } catch (FileNotFoundException e) {
-            LOGGER.error("FileNotFoundException: "+e.getMessage());
+            LOGGER.error("FileNotFoundException: " + e.getMessage());
             throw new RuntimeException("'db.properties' not found");
         } catch (IOException e) {
-            LOGGER.error("IOException: "+e.getMessage());
+            LOGGER.error("IOException: " + e.getMessage());
             throw new RuntimeException("'db.properties' not load in Properties");
         }
     }
@@ -65,7 +65,7 @@ public class DBConnection {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
-            LOGGER.error("SQLException: "+e.getMessage());
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
