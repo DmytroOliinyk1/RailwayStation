@@ -17,6 +17,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for deleting account.
+ */
 @WebServlet(name = "DeleteAccountServlet", urlPatterns = ServletUrl.DELETE_ACCOUNT)
 public class DeleteAccountServlet extends HttpServlet {
 
@@ -25,7 +28,7 @@ public class DeleteAccountServlet extends HttpServlet {
     private UserService userService;
 
     /**
-     * Method initializes resources
+     * Method initializes resources.
      *
      * @throws ServletException
      */
@@ -36,14 +39,15 @@ public class DeleteAccountServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /delete-account url and
-     * deletes account
+     * deletes account.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             Optional<UserDto> currentUser = Optional.of(
                     (UserDto) request.getSession().getAttribute("currentUser"));
@@ -62,14 +66,15 @@ public class DeleteAccountServlet extends HttpServlet {
 
     /**
      * Method processes GET request for /delete-account url and
-     * forward to /delete-history url
+     * forward to /delete-history url.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             Optional<UserDto> currentUser = Optional.of(
                     (UserDto) request.getSession().getAttribute("currentUser"));

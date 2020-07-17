@@ -21,6 +21,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for login user.
+ */
 @WebServlet(name = "LoginServlet", urlPatterns = ServletUrl.LOGIN)
 public class LoginServlet extends HttpServlet {
 
@@ -40,18 +43,22 @@ public class LoginServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /login url and
+     * login user.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             if (LoginUtils.checkEmail(request.getParameter("email")) &&
                     LoginUtils.checkPassword(request.getParameter("password"))) {
                 Optional<UserDto> currentUser = Optional.of(
-                        userService.login(request.getParameter("email"), request.getParameter("password")));
+                        userService.login(
+                                request.getParameter("email"), request.getParameter("password")));
+
                 LOGGER.info("Login user");
                 HttpSession session = request.getSession();
                 session.setAttribute("currentUser", currentUser.get());
@@ -68,14 +75,15 @@ public class LoginServlet extends HttpServlet {
 
     /**
      * Method processes GET request for /login url and forward to
-     * forward to /view/login.jsp
+     * forward to /view/login.jsp.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.LOGIN).forward(request, response);
     }
 }

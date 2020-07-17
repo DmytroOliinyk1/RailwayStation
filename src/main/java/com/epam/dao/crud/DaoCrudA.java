@@ -1,6 +1,5 @@
 package com.epam.dao.crud;
 
-import com.epam.controller.user.LoginServlet;
 import com.epam.db.DBConnection;
 import com.epam.entity.Entity;
 import com.epam.entity.SqlQuery;
@@ -16,14 +15,14 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity> implements DaoCrudI<TEntity> {
+public abstract class DaoCrudA<TEntity extends Entity>
+        extends DaoReadA<TEntity> implements DaoCrudI<TEntity> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DaoCrudA.class);
-
-    private final int BEGIN_RANGE_WITHOUT_ID = 1;
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(DaoCrudA.class);
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     protected DaoCrudA() {
         super();
@@ -31,7 +30,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
 
     /**
      * Method gets fields of TEntity and
-     * put them in array
+     * put them in array.
      *
      * @param entity
      * @return array of fields
@@ -39,7 +38,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
     protected abstract Object[] getFields(TEntity entity);
 
     /**
-     * Method inserts object type of TEntity into database
+     * Method inserts object type of TEntity into database.
      *
      * @param object
      * @return boolean result of inserting
@@ -47,6 +46,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
     @Override
     public boolean insert(TEntity object) {
         try (Connection connection = DBConnection.getConnection()) {
+            final int BEGIN_RANGE_WITHOUT_ID = 1;
             int status = CrudUtils.update(
                     connection, sqlQueries.get(SqlQuery.INSERT).toString(),
                     Arrays.copyOfRange(getFields(object), BEGIN_RANGE_WITHOUT_ID, getFields(object).length));
@@ -59,7 +59,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
     }
 
     /**
-     * Method updates database by id
+     * Method updates database by id.
      *
      * @param args
      * @return boolean result of updating
@@ -67,10 +67,10 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
     @Override
     public boolean updateById(Object... args) {
         try (Connection connection = DBConnection.getConnection()) {
-
             int status = CrudUtils.update(
-                    connection, sqlQueries.get(SqlQuery.UPDATE_BY_ID).toString(), args
-            );
+                    connection,
+                    sqlQueries.get(SqlQuery.UPDATE_BY_ID).toString(),
+                    args);
             return status > 0;
         } catch (SQLException e) {
             LOGGER.error("SQLException: " + e.getMessage());
@@ -79,7 +79,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
     }
 
     /**
-     * Method updates database by fields
+     * Method updates database by fields.
      *
      * @param fieldsValues
      * @return boolean result of updating
@@ -88,7 +88,9 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
     public boolean updateByFields(Object... fieldsValues) {
         try (Connection connection = DBConnection.getConnection()) {
             int status = CrudUtils.update(
-                    connection, sqlQueries.get(SqlQuery.UPDATE_BY_FIELD).toString(), fieldsValues);
+                    connection,
+                    sqlQueries.get(SqlQuery.UPDATE_BY_FIELD).toString(),
+                    fieldsValues);
             return status > 0;
         } catch (SQLException e) {
             LOGGER.error("SQLException: " + e.getMessage());
@@ -99,7 +101,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
     }
 
     /**
-     * Method deletes from database by id
+     * Method deletes from database by id.
      *
      * @param id
      * @return boolean result of deleting
@@ -108,7 +110,9 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
     public boolean deleteById(Long id) {
         try (Connection connection = DBConnection.getConnection()) {
             int status = CrudUtils.update(
-                    connection, sqlQueries.get(SqlQuery.DELETE_BY_ID).toString(), id
+                    connection,
+                    sqlQueries.get(SqlQuery.DELETE_BY_ID).toString(),
+                    id
             );
             return status == 1;
         } catch (SQLException e) {
@@ -118,7 +122,7 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
     }
 
     /**
-     * Method deletes from database by fields
+     * Method deletes from database by fields.
      *
      * @param fieldsValues
      * @return boolean result of deleting
@@ -127,7 +131,9 @@ public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity>
     public boolean deleteByFields(Object... fieldsValues) {
         try (Connection connection = DBConnection.getConnection()) {
             int status = CrudUtils.update(
-                    connection, sqlQueries.get(SqlQuery.DELETE_BY_FIELD).toString(), fieldsValues
+                    connection,
+                    sqlQueries.get(SqlQuery.DELETE_BY_FIELD).toString(),
+                    fieldsValues
             );
             return status > 0;
         } catch (SQLException e) {

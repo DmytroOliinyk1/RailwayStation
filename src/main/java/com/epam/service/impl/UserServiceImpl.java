@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Method checks if user exists
+     * Method checks if user exists.
      *
      * @param email
      * @param password
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Method changes account password
+     * Method changes account password.
      *
      * @param email
      * @param newPassword
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Method saves new user in database
+     * Method saves new user in database.
      *
      * @param userDto
      * @return boolean result of saving
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Method deletes user from database
+     * Method deletes user from database.
      *
      * @param id
      * @return boolean result of deleting

@@ -10,10 +10,11 @@ import org.slf4j.LoggerFactory;
 
 public class UserDtoMapper implements DtoMapper<UserDto> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserDtoMapper.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(UserDtoMapper.class);
 
     /**
-     * Method converts Entity to UserDto
+     * Method converts Entity to UserDto.
      *
      * @param entity
      * @return object type of UserDto

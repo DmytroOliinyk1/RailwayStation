@@ -22,6 +22,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for getting trains.
+ */
 @WebServlet(name = "GetTrainServlet", urlPatterns = ServletUrl.GET_TRAIN)
 public class GetTrainServlet extends HttpServlet {
 
@@ -30,7 +33,7 @@ public class GetTrainServlet extends HttpServlet {
     TrainService trainService;
 
     /**
-     * Method initializes resources
+     * Method initializes resources.
      *
      * @throws ServletException
      */
@@ -40,27 +43,29 @@ public class GetTrainServlet extends HttpServlet {
     }
 
     /**
-     * Method processes POST request for /get-train url
+     * Method processes POST request for /get-train url.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
     }
 
     /**
      * Method processes GET request for /get-train url and
-     * gets train
+     * gets train.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             Optional<UserDto> currentUser = Optional.of(
                     (UserDto) request.getSession().getAttribute("currentUser")

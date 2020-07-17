@@ -1,6 +1,5 @@
 package com.epam.dao.builder;
 
-import com.epam.controller.user.LoginServlet;
 import com.epam.entity.User;
 
 import java.sql.ResultSet;
@@ -11,10 +10,11 @@ import org.slf4j.LoggerFactory;
 
 public class UserBuilder implements InstanceBuilder<User> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserBuilder.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(UserBuilder.class);
 
     /**
-     * Method creates object type of User from ResultSet
+     * Method creates object type of User from ResultSet.
      *
      * @param resultSet
      * @return object type of User

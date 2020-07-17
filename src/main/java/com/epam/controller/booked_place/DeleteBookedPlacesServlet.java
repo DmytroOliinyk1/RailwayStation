@@ -24,6 +24,9 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for deleting booked places.
+ */
 @WebServlet(name = "DeleteBookedPlacesServlet", urlPatterns = ServletUrl.DELETE_BOOKED_PLACES)
 public class DeleteBookedPlacesServlet extends HttpServlet {
 
@@ -32,7 +35,7 @@ public class DeleteBookedPlacesServlet extends HttpServlet {
     private BookedPlaceService bookedPlaceService;
 
     /**
-     * Initialize resources
+     * Initialize resources.
      *
      * @throws ServletException
      */
@@ -43,14 +46,15 @@ public class DeleteBookedPlacesServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /delete-booked-places url
-     * and delete user's booked places
+     * and delete user's booked places.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
         try {
             List<HistoryDto> userHistoryList = (ArrayList<HistoryDto>) request.getAttribute("userHistoryList");
@@ -86,14 +90,15 @@ public class DeleteBookedPlacesServlet extends HttpServlet {
 
     /**
      * Method processes GET request for /delete-booked-places url
-     * and forward to /view/search-trains.jsp
+     * and forward to /view/search-trains.jsp.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }
 }

@@ -1,6 +1,5 @@
 package com.epam.dao;
 
-import com.epam.controller.user.LoginServlet;
 import com.epam.dao.crud.DaoCrudA;
 import com.epam.entity.History;
 
@@ -9,18 +8,20 @@ import org.slf4j.LoggerFactory;
 
 public class HistoryDao extends DaoCrudA<History> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HistoryDao.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(HistoryDao.class);
 
     /**
      * Method gets fields of History and
-     * put them in array
+     * put them in array.
      *
      * @param entity
      * @return array of fields
      */
     @Override
     protected Object[] getFields(History entity) {
-        Object[] fields = new Object[11];
+        final int NUMBER_OF_FIELDS_IN_ENTITY = 11;
+        Object[] fields = new Object[NUMBER_OF_FIELDS_IN_ENTITY];
         fields[0] = entity.getId();
         fields[1] = entity.getTrainNumber();
         fields[2] = entity.getFromStation();
@@ -36,7 +37,7 @@ public class HistoryDao extends DaoCrudA<History> {
     }
 
     /**
-     * Method puts sql queries in map
+     * Method puts sql queries in map.
      */
     @Override
     protected void init() {

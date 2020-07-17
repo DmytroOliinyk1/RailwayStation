@@ -2,7 +2,6 @@ package com.epam.controller.booked_place;
 
 import com.epam.constants.jsp_url.JspUrl;
 import com.epam.constants.servlet_url.ServletUrl;
-import com.epam.controller.user.LoginServlet;
 import com.epam.dto.BookedPlaceDto;
 import com.epam.dto.TrainDto;
 import com.epam.dto.UserDto;
@@ -25,6 +24,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for buying tickets on trains.
+ */
 @WebServlet(name = "BuyTicketServlet", urlPatterns = ServletUrl.BUY_TICKETS)
 public class BuyTicketServlet extends HttpServlet {
 
@@ -33,7 +35,7 @@ public class BuyTicketServlet extends HttpServlet {
     private BookedPlaceService bookedPlaceService;
 
     /**
-     * Method initializes resources
+     * Method initializes resources.
      *
      * @throws ServletException
      */
@@ -44,14 +46,15 @@ public class BuyTicketServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /buy-ticket url and
-     * saves booked place
+     * saves booked place.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
         try {
             Optional<UserDto> userDto = Optional.of(
@@ -67,14 +70,15 @@ public class BuyTicketServlet extends HttpServlet {
 
             String date = request.getParameter("departureDate");
 
-            Date departureDate = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
+            Date departureDate = new Date(
+                    new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
 
             if (DateUtils.compareDateAndTime(departureDate, trainDto.get().getDepartureTime())) {
                 throw new RuntimeException("Train has already departed. Couldn't buy ticket");
             }
 
-            BookedPlaceDto bookedPlaceDto = new BookedPlaceDto(wagonNumber, placeNumber, departureDate,
-                    trainDto.get().getTrainId());
+            BookedPlaceDto bookedPlaceDto = new BookedPlaceDto(
+                    wagonNumber, placeNumber, departureDate, trainDto.get().getTrainId());
 
             if (bookedPlaceService.getDisabledPlaces(bookedPlaceDto).isEmpty()) {
                 bookedPlaceService.saveBookedPlace(bookedPlaceDto);
@@ -103,14 +107,15 @@ public class BuyTicketServlet extends HttpServlet {
 
     /**
      * Method processes GET request for /buy-ticket url and
-     * forwards to /view/search-trains.jsp
+     * forwards to /view/search-trains.jsp.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }
 }

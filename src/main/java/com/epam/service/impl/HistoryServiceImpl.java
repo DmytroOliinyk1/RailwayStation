@@ -22,7 +22,7 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * Method save booked ticket in database
+     * Method save booked ticket in database.
      *
      * @param bookedPlaceDto
      * @param trainDto
@@ -42,7 +42,7 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * Method gets list objects of type HistoryDto
+     * Method gets list objects of type HistoryDto.
      *
      * @param userId
      * @return list objects of type HistoryDto

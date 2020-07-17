@@ -1,6 +1,5 @@
 package com.epam.dao;
 
-import com.epam.controller.user.LoginServlet;
 import com.epam.dao.crud.DaoCrudA;
 import com.epam.entity.BookedPlace;
 
@@ -9,18 +8,20 @@ import org.slf4j.LoggerFactory;
 
 public class BookedPlaceDao extends DaoCrudA<BookedPlace> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BookedPlaceDao.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(BookedPlaceDao.class);
 
     /**
      * Method gets fields of BookedPlace and
-     * put them in array
+     * put them in array.
      *
      * @param entity
      * @return array of fields
      */
     @Override
     protected Object[] getFields(BookedPlace entity) {
-        Object[] fields = new Object[5];
+        final int NUMBER_OF_FIELDS_IN_ENTITY = 5;
+        Object[] fields = new Object[NUMBER_OF_FIELDS_IN_ENTITY];
         fields[0] = entity.getId();
         fields[1] = entity.getWagonNumber();
         fields[2] = entity.getPlaceNumber();
@@ -30,15 +31,14 @@ public class BookedPlaceDao extends DaoCrudA<BookedPlace> {
     }
 
     /**
-     * Method puts sql queries in map
+     * Method puts sql queries in map.
      */
     @Override
     protected void init() {
-        for (BookedPlace.bookedPlaceSqlQuery bookedPlaceSqlQuery : BookedPlace.bookedPlaceSqlQuery.values()) {
+        for (BookedPlace.bookedPlaceSqlQuery bookedPlaceSqlQuery :
+                BookedPlace.bookedPlaceSqlQuery.values()) {
             sqlQueries.put(bookedPlaceSqlQuery.getSqlQuery(), bookedPlaceSqlQuery);
         }
         LOGGER.info("Put BookedPlace's sqlQueries in Map sqlQueries");
     }
-
-
 }

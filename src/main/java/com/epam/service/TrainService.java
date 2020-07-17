@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TrainService {
     /**
-     * Method gets list of trains from database
+     * Method gets list of trains from database.
      *
      * @param fromStation
      * @param toStation
@@ -15,7 +15,7 @@ public interface TrainService {
     List<TrainDto> getAvailableTrain(String fromStation, String toStation);
 
     /**
-     * Method gets train from database
+     * Method gets train from database.
      *
      * @param id
      * @return object of type TrainDto

@@ -10,10 +10,11 @@ import org.slf4j.LoggerFactory;
 
 public class TrainDtoMapper implements DtoMapper<TrainDto> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TrainDtoMapper.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(TrainDtoMapper.class);
 
     /**
-     * Method converts Entity to TrainDto
+     * Method converts Entity to TrainDto.
      *
      * @param entity
      * @return object type of TrainDto

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class TrainSearchUtils {
 
     /**
-     * Method compares input route to regex
+     * Method compares input route to regex.
      *
      * @param from
      * @param to

@@ -18,8 +18,12 @@ import org.slf4j.LoggerFactory;
 
 public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DaoReadA.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(DaoReadA.class);
 
+    /**
+     * Map stores sql queries.
+     */
     protected final Map<Enum<?>, Enum<?>> sqlQueries;
 
     /**
@@ -32,7 +36,7 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
 
     /**
      * Method gets object type of TEntity from database
-     * by id
+     * by id.
      *
      * @param builder
      * @param id
@@ -50,7 +54,7 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
 
     /**
      * Method gets object type of TEntity from database
-     * by fields
+     * by fields.
      *
      * @param builder
      * @param fields
@@ -59,7 +63,8 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
     @Override
     public List<TEntity> getByFields(InstanceBuilder<TEntity> builder, Object... fields) {
         try (Connection connection = DBConnection.getConnection()) {
-            return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_BY_FIELD).toString(), fields);
+            return CrudUtils.getEntityList(
+                    connection, builder, sqlQueries.get(SqlQuery.GET_BY_FIELD).toString(), fields);
         } catch (SQLException e) {
             LOGGER.error("SQLException: " + e.getMessage());
             throw new NotFoundException(e.getMessage());
@@ -68,7 +73,7 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
 
     /**
      * Method gets list objects type of TEntity from database
-     * by parameters
+     * by parameters.
      *
      * @param builder
      * @param params
@@ -77,7 +82,8 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
     @Override
     public List<TEntity> getAll(InstanceBuilder<TEntity> builder, Object... params) {
         try (Connection connection = DBConnection.getConnection()) {
-            return CrudUtils.getEntityList(connection, builder, sqlQueries.get(SqlQuery.GET_ALL).toString(), params);
+            return CrudUtils.getEntityList(
+                    connection, builder, sqlQueries.get(SqlQuery.GET_ALL).toString(), params);
         } catch (SQLException e) {
             LOGGER.error("SQLException: " + e.getMessage());
             throw new NotFoundException(e.getMessage());
@@ -85,7 +91,7 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
     }
 
     /**
-     * Initialize query resources
+     * Method initializes query resources.
      */
     protected abstract void init();
 }

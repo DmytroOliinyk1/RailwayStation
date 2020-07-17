@@ -20,6 +20,9 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for registering new user.
+ */
 @WebServlet(name = "RegistrationServlet", urlPatterns = ServletUrl.REGISTRATION)
 public class RegistrationServlet extends HttpServlet {
 
@@ -28,7 +31,7 @@ public class RegistrationServlet extends HttpServlet {
     UserService userService;
 
     /**
-     * Method initializes resources
+     * Method initializes resources.
      *
      * @throws ServletException
      */
@@ -39,14 +42,15 @@ public class RegistrationServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /registration url and
-     * saves new user
+     * saves new user.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             if (LoginUtils.checkEmail(request.getParameter("email")) &&
                     LoginUtils.checkPassword(request.getParameter("password")) &&
@@ -75,14 +79,15 @@ public class RegistrationServlet extends HttpServlet {
 
     /**
      * Method processes GET request for /registration url and
-     * forward /view/login.jsp
+     * forward /view/login.jsp.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.REGISTRATION).forward(request, response);
     }
 }

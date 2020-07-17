@@ -7,7 +7,7 @@ import java.util.List;
 public interface DaoReadI<TEntity> {
     /**
      * Method gets object type of TEntity from database
-     * by id
+     * by id.
      *
      * @param builder
      * @param id
@@ -17,7 +17,7 @@ public interface DaoReadI<TEntity> {
 
     /**
      * Method gets object type of TEntity from database
-     * by fields
+     * by fields.
      *
      * @param builder
      * @param fields
@@ -27,7 +27,7 @@ public interface DaoReadI<TEntity> {
 
     /**
      * Method gets list objects type of TEntity from database
-     * by parameters
+     * by parameters.
      *
      * @param builder
      * @param params

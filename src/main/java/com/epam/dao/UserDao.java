@@ -1,6 +1,5 @@
 package com.epam.dao;
 
-import com.epam.controller.user.LoginServlet;
 import com.epam.dao.crud.DaoCrudA;
 import com.epam.entity.User;
 
@@ -9,7 +8,8 @@ import org.slf4j.LoggerFactory;
 
 public class UserDao extends DaoCrudA<User> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(UserDao.class);
 
     /**
      * Method gets fields of User and
@@ -20,7 +20,8 @@ public class UserDao extends DaoCrudA<User> {
      */
     @Override
     protected Object[] getFields(User entity) {
-        Object[] fields = new Object[5];
+        final int NUMBER_OF_FIELDS_IN_ENTITY = 5;
+        Object[] fields = new Object[NUMBER_OF_FIELDS_IN_ENTITY];
         fields[0] = entity.getId();
         fields[1] = entity.getEmail();
         fields[2] = entity.getPassword();

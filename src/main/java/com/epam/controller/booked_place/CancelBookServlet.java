@@ -18,6 +18,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for canceling booking.
+ */
 @WebServlet(name = "CancelBookServlet", urlPatterns = ServletUrl.CANCEL_BOOK)
 public class CancelBookServlet extends HttpServlet {
 
@@ -26,7 +29,7 @@ public class CancelBookServlet extends HttpServlet {
     BookedPlaceService bookedPlaceService;
 
     /**
-     * Method initializes resources
+     * Method initializes resources.
      *
      * @throws ServletException
      */
@@ -37,14 +40,15 @@ public class CancelBookServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /cancel-book url and
-     * deletes booked place if happened trouble in /save-ticket servlet
+     * deletes booked place if happened trouble in /save-ticket servlet.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             Optional<BookedPlaceDto> currentBookedPlace = Optional.of(
                     (BookedPlaceDto) request.getAttribute("currentBookedPlace"));
@@ -60,14 +64,15 @@ public class CancelBookServlet extends HttpServlet {
 
     /**
      * Method processes GET request for /cancel-book url and
-     * forwards to /view/search-trains
+     * forwards to /view/search-trains.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }
 }

@@ -20,6 +20,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for searching trains.
+ */
 @WebServlet(name = "SearchServlet", urlPatterns = ServletUrl.SEARCH_TRAINS)
 public class SearchServlet extends HttpServlet {
 
@@ -28,7 +31,7 @@ public class SearchServlet extends HttpServlet {
     TrainService trainService;
 
     /**
-     * Method initializes resources
+     * Method initializes resources.
      *
      * @throws ServletException
      */
@@ -39,14 +42,15 @@ public class SearchServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /search-trains url and
-     * searches trains with input route
+     * searches trains with input route.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             if (TrainSearchUtils.checkRoute(
                     request.getParameter("fromStation"), request.getParameter("toStation"))
@@ -75,14 +79,15 @@ public class SearchServlet extends HttpServlet {
 
     /**
      * Method processes GET request for /search-trains url and
-     * forwards to /view/search-trains.jsp
+     * forwards to /view/search-trains.jsp.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }
 }

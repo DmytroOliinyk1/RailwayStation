@@ -19,6 +19,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for .
+ */
 @WebServlet(name = "ChangePasswordServlet", urlPatterns = ServletUrl.CHANGE_PASSWORD)
 public class ChangePasswordServlet extends HttpServlet {
 
@@ -27,7 +30,7 @@ public class ChangePasswordServlet extends HttpServlet {
     UserService userService;
 
     /**
-     * Method initializes resources
+     * Method initializes resources.
      *
      * @throws ServletException
      */
@@ -38,7 +41,7 @@ public class ChangePasswordServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /change-password url and
-     * changes account password
+     * changes account password.
      *
      * @param request
      * @param response
@@ -95,14 +98,15 @@ public class ChangePasswordServlet extends HttpServlet {
 
     /**
      * Method processes GET request for /change-password url and
-     * forwards to /view/change-password.jsp
+     * forwards to /view/change-password.jsp.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.CHANGE_PASSWORD).forward(request, response);
     }
 }

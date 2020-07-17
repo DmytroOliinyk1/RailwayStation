@@ -1,5 +1,8 @@
 package com.epam.constants.servlet_url;
 
+/**
+ * Interface stores servlet url.
+ */
 public interface ServletUrl {
     String BUY_TICKETS = "/buy-ticket";
     String CANCEL_BOOK = "/cancel-book";

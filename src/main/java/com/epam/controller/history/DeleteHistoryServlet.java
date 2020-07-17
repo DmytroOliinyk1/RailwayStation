@@ -21,6 +21,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for deleting history of booking.
+ */
 @WebServlet(name = "DeleteHistoryServlet", urlPatterns = ServletUrl.DELETE_HISTORY)
 public class DeleteHistoryServlet extends HttpServlet {
 
@@ -29,7 +32,7 @@ public class DeleteHistoryServlet extends HttpServlet {
     private HistoryService historyService;
 
     /**
-     * Initialize resources
+     * Initialize resources.
      *
      * @throws ServletException
      */
@@ -40,14 +43,15 @@ public class DeleteHistoryServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /delete-history url
-     * and delete user's history
+     * and delete user's history.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             Optional<UserDto> currentUser = Optional.of(
                     (UserDto) request.getSession().getAttribute("currentUser")
@@ -67,14 +71,15 @@ public class DeleteHistoryServlet extends HttpServlet {
 
     /**
      * Method processes GET request for /delete-history url
-     * and forward to /view/search-trains.jsp
+     * and forward to /view/search-trains.jsp.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }
 }

@@ -20,6 +20,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for getting history of booking.
+ */
 @WebServlet(name = "GetHistoryServlet", urlPatterns = ServletUrl.GET_HISTORY)
 public class GetHistoryServlet extends HttpServlet {
 

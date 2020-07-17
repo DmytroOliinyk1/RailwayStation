@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface HistoryService {
     /**
-     * Method save booked ticket in database
+     * Method save booked ticket in database.
      *
      * @param bookedPlaceDto
      * @param trainDto
@@ -18,7 +18,7 @@ public interface HistoryService {
     boolean saveTicket(BookedPlaceDto bookedPlaceDto, TrainDto trainDto, Long userId);
 
     /**
-     * Method gets list objects of type HistoryDto
+     * Method gets list objects of type HistoryDto.
      *
      * @param userId
      * @return list objects of type HistoryDto

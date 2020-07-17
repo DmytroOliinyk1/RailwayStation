@@ -1,6 +1,5 @@
 package com.epam.dao;
 
-import com.epam.controller.user.LoginServlet;
 import com.epam.dao.crud.DaoCrudA;
 import com.epam.entity.Train;
 
@@ -9,7 +8,8 @@ import org.slf4j.LoggerFactory;
 
 public class TrainDao extends DaoCrudA<Train> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TrainDao.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(TrainDao.class);
 
     /**
      * Method gets fields of Train and
@@ -20,7 +20,8 @@ public class TrainDao extends DaoCrudA<Train> {
      */
     @Override
     protected Object[] getFields(Train entity) {
-        Object[] fields = new Object[9];
+        final int NUMBER_OF_FIELDS_IN_ENTITY = 9;
+        Object[] fields = new Object[NUMBER_OF_FIELDS_IN_ENTITY];
         fields[0] = entity.getId();
         fields[1] = entity.getTrainNumber();
         fields[2] = entity.getFromStation();

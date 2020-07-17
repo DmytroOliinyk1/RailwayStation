@@ -20,11 +20,12 @@ import org.slf4j.LoggerFactory;
 
 public class CrudUtils {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CrudUtils.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(CrudUtils.class);
 
     /**
      * Method gets object of type TEntity
-     * from database
+     * from database.
      *
      * @param connection
      * @param builder
@@ -44,14 +45,14 @@ public class CrudUtils {
             }
             return Optional.empty();
         } catch (SQLException e) {
-            LOGGER.error("SQLException: "+e.getMessage());
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
     /**
      * Method gets list objects of type TEntity
-     * from database
+     * from database.
      *
      * @param connection
      * @param builder
@@ -72,14 +73,14 @@ public class CrudUtils {
                 return entityList;
             }
         } catch (SQLException e) {
-            LOGGER.error("SQLException: "+e.getMessage());
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
     /**
      * Method inserts/updates/deletes objects
-     * in database
+     * in database.
      *
      * @param connection
      * @param sqlQuery
@@ -91,13 +92,13 @@ public class CrudUtils {
             setArgsToStatement(preparedStatement, args);
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("SQLException: "+e.getMessage());
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
     /**
-     * Method sets arguments in prepared statement
+     * Method sets arguments in prepared statement.
      *
      * @param preparedStatement
      * @param args
@@ -120,7 +121,7 @@ public class CrudUtils {
                 }
             }
         } catch (SQLException e) {
-            LOGGER.error("SQLException: "+e.getMessage());
+            LOGGER.error("SQLException: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }

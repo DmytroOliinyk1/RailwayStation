@@ -1,8 +1,6 @@
 package com.epam.dao.builder;
 
-import com.epam.controller.user.LoginServlet;
 import com.epam.entity.History;
-import com.epam.entity.Train;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,10 +10,11 @@ import org.slf4j.LoggerFactory;
 
 public class HistoryBuilder implements InstanceBuilder<History> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HistoryBuilder.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(HistoryBuilder.class);
 
     /**
-     * Method creates object type of History from ResultSet
+     * Method creates object type of History from ResultSet.
      *
      * @param resultSet
      * @return object type of History

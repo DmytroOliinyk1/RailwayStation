@@ -6,7 +6,7 @@ public class LoginUtils {
 
 
     /**
-     * Method compares email to regex
+     * Method compares email to regex.
      *
      * @param email
      * @return boolean result of comparing
@@ -17,7 +17,7 @@ public class LoginUtils {
     }
 
     /**
-     * Method compares name and surname to regex
+     * Method compares name and surname to regex.
      *
      * @param name
      * @param surname
@@ -29,7 +29,7 @@ public class LoginUtils {
     }
 
     /**
-     * Method compares password to regex
+     * Method compares password to regex.
      *
      * @param password
      * @return boolean result of comparing

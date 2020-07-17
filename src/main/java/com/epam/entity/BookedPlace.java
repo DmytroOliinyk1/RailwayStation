@@ -21,7 +21,6 @@ public class BookedPlace extends Entity {
                 "WagonNumber = ? AND PlaceNumber = ? AND DepartureDate = ? AND TrainID = ?;");
 
 
-
         private SqlQuery sqlQuery;
         private String query;
 

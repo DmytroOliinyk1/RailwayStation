@@ -11,10 +11,11 @@ import org.slf4j.LoggerFactory;
 
 public class HistoryDtoMapper implements DtoMapper<HistoryDto> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HistoryDtoMapper.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(HistoryDtoMapper.class);
 
     /**
-     * Method converts Entity to HistoryDto
+     * Method converts Entity to HistoryDto.
      *
      * @param entity
      * @return object type of HistoryDto

@@ -1,6 +1,5 @@
 package com.epam.db;
 
-import com.epam.controller.user.LoginServlet;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.io.FileInputStream;
@@ -15,7 +14,8 @@ import org.slf4j.LoggerFactory;
 
 public class DBConnection {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DBConnection.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(DBConnection.class);
 
     private final static String DB_DRIVER = "driver.class.name";
     private final static String DB_URL = "db.url";
@@ -57,7 +57,7 @@ public class DBConnection {
     }
 
     /**
-     * Method gets connection to database
+     * Method gets connection to database.
      *
      * @return object type of Connection
      */

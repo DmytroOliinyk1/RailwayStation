@@ -10,10 +10,11 @@ import org.slf4j.LoggerFactory;
 
 public class BookedPlaceBuilder implements InstanceBuilder<BookedPlace> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BookedPlaceBuilder.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(BookedPlaceBuilder.class);
 
     /**
-     * Method creates object type of BookedPlace from ResultSet
+     * Method creates object type of BookedPlace from ResultSet.
      *
      * @param resultSet
      * @return object type of BookedPlace

@@ -13,10 +13,11 @@ import org.slf4j.LoggerFactory;
 
 public class DateUtils {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateUtils.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(DateUtils.class);
 
     /**
-     * Method adds one month to current date
+     * Method adds one month to current date.
      *
      * @return object of type Date
      */
@@ -31,7 +32,7 @@ public class DateUtils {
     }
 
     /**
-     * Method subtracts one day from current date
+     * Method subtracts one day from current date.
      *
      * @return object of type Date
      */
@@ -46,7 +47,7 @@ public class DateUtils {
     }
 
     /**
-     * Method compares input date and time to current date and time
+     * Method compares input date and time to current date and time.
      *
      * @param comparingDate
      * @param time

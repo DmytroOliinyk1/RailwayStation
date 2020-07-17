@@ -22,6 +22,9 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for getting current user`s tickets.
+ */
 @WebServlet(name = "MyTicketsServlet", urlPatterns = ServletUrl.MY_TICKETS)
 public class MyTicketsServlet extends HttpServlet {
 
@@ -30,7 +33,7 @@ public class MyTicketsServlet extends HttpServlet {
     private HistoryService historyService;
 
     /**
-     * Method initializes resources
+     * Method initializes resources.
      *
      * @throws ServletException
      */
@@ -40,27 +43,29 @@ public class MyTicketsServlet extends HttpServlet {
     }
 
     /**
-     * Method processes POST request for /my-tickets url
+     * Method processes POST request for /my-tickets url.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
     }
 
     /**
      * Method processes GET request for /my-tickets url and
-     * gets user's tickets
+     * gets user's tickets.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             Optional<UserDto> currentUser = Optional.of(
                     (UserDto) request.getSession().getAttribute("currentUser")

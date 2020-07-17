@@ -3,7 +3,7 @@ package com.epam.dto;
 import java.sql.Date;
 
 public class BookedPlaceDto {
-    private Long BookedPlaceId;
+    private Long bookedPlaceId;
     private Long wagonNumber;
     private Long placeNumber;
     private Date departureDate;
@@ -20,7 +20,7 @@ public class BookedPlaceDto {
     }
 
     public BookedPlaceDto(Long bookedPlaceId, Long wagonNumber, Long placeNumber, Date departureDate, Long trainId) {
-        BookedPlaceId = bookedPlaceId;
+        this.bookedPlaceId = bookedPlaceId;
         this.wagonNumber = wagonNumber;
         this.placeNumber = placeNumber;
         this.departureDate = departureDate;
@@ -28,11 +28,11 @@ public class BookedPlaceDto {
     }
 
     public Long getBookedPlaceId() {
-        return BookedPlaceId;
+        return bookedPlaceId;
     }
 
     public void setBookedPlaceId(Long bookedPlaceId) {
-        BookedPlaceId = bookedPlaceId;
+        this.bookedPlaceId = bookedPlaceId;
     }
 
     public Long getWagonNumber() {
@@ -74,7 +74,7 @@ public class BookedPlaceDto {
 
         BookedPlaceDto that = (BookedPlaceDto) o;
 
-        if (BookedPlaceId != null ? !BookedPlaceId.equals(that.BookedPlaceId) : that.BookedPlaceId != null)
+        if (bookedPlaceId != null ? !bookedPlaceId.equals(that.bookedPlaceId) : that.bookedPlaceId != null)
             return false;
         if (wagonNumber != null ? !wagonNumber.equals(that.wagonNumber) : that.wagonNumber != null) return false;
         if (placeNumber != null ? !placeNumber.equals(that.placeNumber) : that.placeNumber != null) return false;
@@ -85,7 +85,7 @@ public class BookedPlaceDto {
 
     @Override
     public int hashCode() {
-        int result = BookedPlaceId != null ? BookedPlaceId.hashCode() : 0;
+        int result = bookedPlaceId != null ? bookedPlaceId.hashCode() : 0;
         result = 31 * result + (wagonNumber != null ? wagonNumber.hashCode() : 0);
         result = 31 * result + (placeNumber != null ? placeNumber.hashCode() : 0);
         result = 31 * result + (departureDate != null ? departureDate.hashCode() : 0);

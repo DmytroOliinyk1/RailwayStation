@@ -1,6 +1,5 @@
 package com.epam.dto.mapper;
 
-import com.epam.controller.user.LoginServlet;
 import com.epam.dto.BookedPlaceDto;
 import com.epam.entity.BookedPlace;
 import com.epam.entity.Entity;
@@ -10,10 +9,11 @@ import org.slf4j.LoggerFactory;
 
 public class BookedPlaceDtoMapper implements DtoMapper<BookedPlaceDto> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BookedPlaceDtoMapper.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(BookedPlaceDtoMapper.class);
 
     /**
-     * Method converts Entity to BookedPlaceDto
+     * Method converts Entity to BookedPlaceDto.
      *
      * @param entity
      * @return object type of BookedPlaceDto

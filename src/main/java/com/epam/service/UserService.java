@@ -6,7 +6,7 @@ import com.epam.entity.User;
 
 public interface UserService {
     /**
-     * Method checks if user exist
+     * Method checks if user exist.
      *
      * @param email
      * @param password
@@ -15,7 +15,7 @@ public interface UserService {
     UserDto login(String email, String password);
 
     /**
-     * Method changes account password
+     * Method changes account password.
      *
      * @param email
      * @param newPassword
@@ -24,7 +24,7 @@ public interface UserService {
     boolean changePassword(String email, String newPassword);
 
     /**
-     * Method saves new user in database
+     * Method saves new user in database.
      *
      * @param userDto
      * @return boolean result of saving
@@ -32,7 +32,7 @@ public interface UserService {
     boolean save(UserDto userDto);
 
     /**
-     * Method deletes user from database
+     * Method deletes user from database.
      *
      * @param id
      * @return boolean result of deleting

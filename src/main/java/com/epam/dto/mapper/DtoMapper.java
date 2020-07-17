@@ -4,7 +4,7 @@ import com.epam.entity.Entity;
 
 public interface DtoMapper<TEntity> {
     /**
-     * Method converts Entity to TEntity
+     * Method converts Entity to TEntity.
      *
      * @param entity
      * @return object type of TEntity

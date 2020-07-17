@@ -20,6 +20,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Servlet is used for saving user`s tickets.
+ */
 @WebServlet(name = "SaveTicketServlet", urlPatterns = ServletUrl.SAVE_TICKETS)
 public class SaveTicketServlet extends HttpServlet {
 
@@ -28,7 +31,7 @@ public class SaveTicketServlet extends HttpServlet {
     private HistoryService historyService;
 
     /**
-     * Method initializes resources
+     * Method initializes resources.
      *
      * @throws ServletException
      */
@@ -39,14 +42,15 @@ public class SaveTicketServlet extends HttpServlet {
 
     /**
      * Method processes POST request for /save-ticket url and
-     * saves user's ticket
+     * saves user's ticket.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             Optional<BookedPlaceDto> currentBookedPlace =
                     Optional.of((BookedPlaceDto) request.getAttribute("currentBookedPlace"));
@@ -72,14 +76,15 @@ public class SaveTicketServlet extends HttpServlet {
 
     /**
      * Method processes GET request for /save-ticket url and
-     * forwards to /view/search-trains.jsp
+     * forwards to /view/search-trains.jsp.
      *
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.getRequestDispatcher(JspUrl.SEARCH_TRAINS).forward(request, response);
     }
 }

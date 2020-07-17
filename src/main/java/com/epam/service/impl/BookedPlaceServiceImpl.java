@@ -20,7 +20,7 @@ public class BookedPlaceServiceImpl implements BookedPlaceService {
 
     /**
      * Method gets list objects of type BookedPlaceDto
-     * from database
+     * from database.
      *
      * @param bookedPlaceDto
      * @return list objects of type BookedPlaceDto
@@ -37,7 +37,7 @@ public class BookedPlaceServiceImpl implements BookedPlaceService {
     }
 
     /**
-     * Method saves booked place in database
+     * Method saves booked place in database.
      *
      * @param bookedPlaceDto
      * @return boolean result of saving
@@ -52,7 +52,7 @@ public class BookedPlaceServiceImpl implements BookedPlaceService {
     }
 
     /**
-     * Method deletes booked place from database
+     * Method deletes booked place from database.
      *
      * @param bookedPlaceDto
      * @return boolean result of deleting

@@ -1,5 +1,8 @@
 package com.epam.constants.jsp_url;
 
+/**
+ *Interface stores jsp url.
+ */
 public interface JspUrl {
     String AVAILABLE_TRAINS = "/view/available-trains.jsp";
     String BUY_TICKETS = "/view/buy-ticket.jsp";
