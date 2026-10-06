@@ -33,6 +33,8 @@ public class BookedPlace extends Entity {
             return sqlQuery;
         }
 
+            // test comment on the line 36
+
         @Override
         public String toString() {
             return query;
@@ -84,6 +86,8 @@ public class BookedPlace extends Entity {
     public Long getTrainId() {
         return trainId;
     }
+
+    // test comment on the line 90
 
     public void setTrainId(Long trainId) {
         this.trainId = trainId;
