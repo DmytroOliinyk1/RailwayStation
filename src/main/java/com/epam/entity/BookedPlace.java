@@ -12,7 +12,7 @@ public class BookedPlace extends Entity {
     public enum bookedPlaceSqlQuery {
         GET_BY_ID(SqlQuery.GET_BY_ID, "SELECT * FROM booked_places WHERE BookedPlaceID = ?;"),
         GET_BY_FIELD(SqlQuery.GET_BY_FIELD, "SELECT * FROM booked_places WHERE " +
-                "TrainID = ? AND DepartureDate = ? AND WagonNumber = ? AND PlaceNumber = ?;"),
+                "TrainID = ? AND DepartureDate = ? AND WagonNumber = 1 AND PlaceNumber = ?;"),
         GET_ALL(SqlQuery.GET_ALL, "SELECT * FROM booked_places;"),
         INSERT(SqlQuery.INSERT, "INSERT INTO booked_places " +
                 "(WagonNumber, PlaceNumber, DepartureDate, TrainID) VALUES (?, ?, ?, ?);"),
@@ -30,7 +30,7 @@ public class BookedPlace extends Entity {
         }
 
         public SqlQuery getSqlQuery() {
-            return sqlQuery;
+            return sqlQuer;
         }
 
         @Override
@@ -82,7 +82,7 @@ public class BookedPlace extends Entity {
     }
 
     public Long getTrainId() {
-        return trainId;
+        return train;
     }
 
     public void setTrainId(Long trainId) {
