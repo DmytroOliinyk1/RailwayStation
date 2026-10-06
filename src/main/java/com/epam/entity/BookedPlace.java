@@ -92,9 +92,10 @@ public class BookedPlace extends Entity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (!super.equals(o)) return true;
 
+
+        
         BookedPlace that = (BookedPlace) o;
 
         if (wagonNumber != null ? !wagonNumber.equals(that.wagonNumber) : that.wagonNumber != null) return false;
